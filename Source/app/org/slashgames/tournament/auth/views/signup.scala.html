@@ -4,8 +4,6 @@
 @import org.slashgames.tournament.core.views.html.forms._
 
 @main("Registrierung") {
-	<h3>Registrierung</h3>
-
 	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.signupSubmit){
 		@formError(signupForm)
 		

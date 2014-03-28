@@ -3,11 +3,7 @@
 @import org.slashgames.tournament.core.views.html.main
 
 @main(tournament.name) {
-	<div class="page-header">
-		<h1>@tournament.name <small>@tournament.date</small></h1>
-	</div>
-	
-	<h2>Informationen</h2>
+	<h3>Informationen</h2>
 	
 	<ul>
 		<li><strong>Spiel:</strong> @tournament.game.name</li>
@@ -16,7 +12,7 @@
 		<li><strong>Judge:</strong> @tournament.judge</li>
 	</ul>
 	
-	<h2>Teilnahme</h2>
+	<h3>Teilnahme</h2>
 	
 	<div>
 		@if(tournament.game.name.equals("Hearthstone")) {

@@ -1,6 +1,5 @@
 package org.slashgames.tournament.cms.formdata;
 
-import org.slashgames.tournament.core.models.Game;
 import org.slashgames.tournament.util.StringHelper;
 
 public class TournamentData {
@@ -12,11 +11,27 @@ public class TournamentData {
 
 	public String judge;
 
-	public Game game;
+	public String game;
 
 	public String validate() {
 		if (StringHelper.IsNullOrEmpty(name)) {
 			return "Bitte Turniernamen angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(date)) {
+			return "Bitte Datum angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(location)) {
+			return "Bitte Ort angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(judge)) {
+			return "Bitte Judge angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(game)) {
+			return "Bitte Spiel angeben!";
 		}
 
 		return null;

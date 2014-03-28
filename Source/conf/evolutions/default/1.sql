@@ -15,6 +15,7 @@ create table tournament (
   date                      varchar(255),
   location                  varchar(255),
   judge                     varchar(255),
+  game_name                 varchar(255),
   constraint pk_tournament primary key (id))
 ;
 
@@ -22,6 +23,8 @@ create sequence game_seq;
 
 create sequence tournament_seq;
 
+alter table tournament add constraint fk_tournament_game_1 foreign key (game_name) references game (name) on delete restrict on update restrict;
+create index ix_tournament_game_1 on tournament (game_name);
 
 
 

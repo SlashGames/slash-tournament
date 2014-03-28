@@ -2,8 +2,11 @@ package org.slashgames.tournament.cms.controllers;
 
 import static play.data.Form.form;
 
+import java.util.List;
+
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addTournament;
+import org.slashgames.tournament.core.modelControllers.GameModelController;
 import org.slashgames.tournament.core.modelControllers.TournamentModelController;
 
 import play.data.Form;
@@ -12,15 +15,17 @@ import play.mvc.Result;
 
 public class TournamentCMSController extends Controller {
 	public static Result addTournament() {
-		return ok(addTournament.render(form(TournamentData.class)));
+		List<String> gameNames = GameModelController.getGameNames();
+		return ok(addTournament.render(form(TournamentData.class), gameNames));
 	}
 
 	public static Result addTournamentSubmit() {
 		Form<TournamentData> tournamentForm = form(TournamentData.class)
 				.bindFromRequest();
+		List<String> gameNames = GameModelController.getGameNames();
 
 		if (tournamentForm.hasErrors()) {
-			return badRequest(addTournament.render(tournamentForm));
+			return badRequest(addTournament.render(tournamentForm, gameNames));
 		} else {
 			TournamentData data = tournamentForm.get();
 			TournamentModelController.addTournament(data);

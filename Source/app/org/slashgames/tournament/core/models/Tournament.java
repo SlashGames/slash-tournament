@@ -2,6 +2,7 @@ package org.slashgames.tournament.core.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -18,5 +19,6 @@ public class Tournament extends Model {
 
 	public String judge;
 
+	@ManyToOne
 	public Game game;
 }

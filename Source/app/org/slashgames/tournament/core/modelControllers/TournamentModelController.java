@@ -25,6 +25,7 @@ public class TournamentModelController {
 		tournament.date = data.date;
 		tournament.location = data.location;
 		tournament.judge = data.judge;
+		tournament.game = GameModelController.findByName(data.game);
 		tournament.save();
 	}
 }

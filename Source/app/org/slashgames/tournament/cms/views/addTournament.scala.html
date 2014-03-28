@@ -1,4 +1,4 @@
-@(tournamentForm: Form[org.slashgames.tournament.cms.formdata.TournamentData])
+@(tournamentForm: Form[org.slashgames.tournament.cms.formdata.TournamentData], games: List[String])
 
 @import org.slashgames.tournament.core.views.html._
 @import org.slashgames.tournament.core.views.html.forms._
@@ -11,6 +11,7 @@
 	  	@formInputText("date", "Datum und Uhrzeit")
 	  	@formInputText("location", "Ort")
 	  	@formInputText("judge", "Judge")
+	  	@formSelect("game", "Spiel", games)
 	  	
 	 	@formButton("Turnier erstellen")
 	}

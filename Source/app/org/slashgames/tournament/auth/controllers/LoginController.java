@@ -25,6 +25,11 @@ public class LoginController extends Controller {
 		return getCurrentUser() != null;
 	}
 
+	public static boolean isAdmin() {
+		User currentUser = getCurrentUser();
+		return currentUser != null && currentUser.isAdmin;
+	}
+
 	public static Result login() {
 		return ok(org.slashgames.tournament.auth.views.html.login
 				.render(form(LoginData.class)));

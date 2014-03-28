@@ -22,6 +22,8 @@ public class User extends Model {
 	@Constraints.Required
 	public String password;
 
+	public boolean isAdmin;
+
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;

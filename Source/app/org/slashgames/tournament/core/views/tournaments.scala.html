@@ -20,4 +20,8 @@
 		   	<div class="col-md-2"><a href="@org.slashgames.tournament.core.controllers.routes.TournamentController.tournament(tournament.id)">Details</a></div>			
 	    </div>
 	}
+	
+	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+		<p><a href="@org.slashgames.tournament.cms.controllers.routes.TournamentCMSController.addTournament()">Turnier hinzuf&uuml;gen</a></p>
+	}
 }

@@ -17,4 +17,6 @@ public class Game extends Model {
 
 	@Column(length = 32768)
 	public String rules;
+
+	public String icon;
 }

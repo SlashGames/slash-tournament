@@ -6,6 +6,7 @@
 create table game (
   name                      varchar(255) not null,
   rules                     varchar(32768),
+  icon                      varchar(255),
   constraint pk_game primary key (name))
 ;
 

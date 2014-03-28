@@ -14,7 +14,7 @@
 	@for(tournament <- tournaments) {
 		<div class="row">
 		   	<div class="col-md-2">@tournament.name</div>
-		   	<div class="col-md-2">@if(tournament.game != null) { @tournament.game.name }</div>
+		   	<div class="col-md-2">@gameName(tournament.game)</div>
 		   	<div class="col-md-2">@tournament.date</div>
 		   	<div class="col-md-2">@tournament.location</div>
 		   	<div class="col-md-2">

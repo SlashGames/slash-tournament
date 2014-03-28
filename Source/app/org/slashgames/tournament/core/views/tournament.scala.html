@@ -15,8 +15,17 @@
 	<h3>Teilnahme</h2>
 	
 	<div>
-		@if(tournament.game.name.equals("Hearthstone")) {
-			<a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participate(tournament.id)">An diesem Turnier teilnehmen</a>
+		@if(org.slashgames.tournament.auth.controllers.LoginController.isLoggedIn()) {
+			@if(tournament.game.name.equals("Hearthstone")) {
+				@if(org.slashgames.tournament.hearthstone.controllers.HearthstoneController.isParticipating(tournament)) {
+					<p>Du nimmst an diesem Turnier teil.</p>
+				} else {
+					<p>Du nimmst an diesem Turnier noch nicht teil.</p>
+					<p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participate(tournament.id)">An diesem Turnier teilnehmen</a></p>
+				}
+			}
+		} else {
+			Du musst eingeloggt sein, um an diesem Turnier teilnehmen zu k&ouml;nnen.
 		}
 	</div>
 }

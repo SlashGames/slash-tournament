@@ -12,6 +12,11 @@ public class HearthstoneParticipationModelController {
 	private static Model.Finder<Long, HearthstoneParticipation> find = new Model.Finder<Long, HearthstoneParticipation>(
 			Long.class, HearthstoneParticipation.class);
 
+	public static boolean isParticipating(User user, Tournament tournament) {
+		return find.where().eq("participant", user)
+				.eq("tournament", tournament).findUnique() != null;
+	}
+
 	public static void addParticipant(User participant, Tournament tournament,
 			HearthstoneParticipationData data) {
 		HearthstoneParticipation participation = new HearthstoneParticipation();

@@ -42,7 +42,13 @@ public class HearthstoneController extends Controller {
 			HearthstoneParticipationModelController.addParticipant(participant,
 					tournament, data);
 			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
-					.tournaments());
+					.tournament(tournamentId));
 		}
+	}
+
+	public static boolean isParticipating(Tournament tournament) {
+		User currentUser = LoginController.getCurrentUser();
+		return HearthstoneParticipationModelController.isParticipating(
+				currentUser, tournament);
 	}
 }

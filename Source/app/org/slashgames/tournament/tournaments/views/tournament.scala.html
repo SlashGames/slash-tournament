@@ -39,8 +39,10 @@
 	<h4>Formatregeln</h4>
 	@Html(tournament.format.rules)
 	
-	<h4>Turnierregeln</h4>
-	<p>@tournament.rules</p>
+	@if(!org.slashgames.tournament.core.util.StringHelper.isNullOrEmpty(tournament.rules)) {
+		<h4>Turnierregeln</h4>
+		<p>@tournament.rules</p>
+	}
 	
 	<h3>Teilnehmer</h3>
 
@@ -61,7 +63,7 @@
 	}
 	
 	<p></p>
-	<p>Die Decklisten der Teilnehmer werden verf&uuml;gbar, sobald der Turnier beendet ist.</p>
+	<p>Die Decklisten der Teilnehmer werden verf&uuml;gbar, sobald das Turnier beendet ist.</p>
 	
 	<h3>Regelversto&szlig;</h3>
 	

@@ -10,7 +10,7 @@ public class SignupData {
 	public String name;
 
 	public String validate() {
-		if (StringHelper.IsNullOrEmpty(email)) {
+		if (StringHelper.isNullOrEmpty(email)) {
 			return "Bitte Email-Adresse angeben!";
 		}
 
@@ -22,7 +22,7 @@ public class SignupData {
 			return "Benutzer existiert bereits";
 		}
 
-		if (StringHelper.IsNullOrEmpty(name)) {
+		if (StringHelper.isNullOrEmpty(name)) {
 			return "Bitte einen Namen angeben!";
 		}
 

@@ -18,17 +18,17 @@ public class HearthstoneParticipationData {
 	public String seedRank;
 
 	public String validate() {
-		if (StringHelper.IsNullOrEmpty(battleTag)) {
+		if (StringHelper.isNullOrEmpty(battleTag)) {
 			return "Bitte BattleTag angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(deck1Link)
-				|| StringHelper.IsNullOrEmpty(deck2Link)
-				|| StringHelper.IsNullOrEmpty(deck3Link)) {
+		if (StringHelper.isNullOrEmpty(deck1Link)
+				|| StringHelper.isNullOrEmpty(deck2Link)
+				|| StringHelper.isNullOrEmpty(deck3Link)) {
 			return "Bitte alle Decklisten angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(seedRank)) {
+		if (StringHelper.isNullOrEmpty(seedRank)) {
 			return "Bitte aktuellen Battle.Net-Rang angeben!";
 		}
 

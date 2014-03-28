@@ -23,35 +23,35 @@ public class TournamentData {
 	public String rules;
 
 	public String validate() {
-		if (StringHelper.IsNullOrEmpty(name)) {
+		if (StringHelper.isNullOrEmpty(name)) {
 			return "Bitte Turniernamen angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(date)) {
+		if (StringHelper.isNullOrEmpty(date)) {
 			return "Bitte Datum angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(location)) {
+		if (StringHelper.isNullOrEmpty(location)) {
 			return "Bitte Ort angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(judge)) {
+		if (StringHelper.isNullOrEmpty(judge)) {
 			return "Bitte Judge angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(game)) {
+		if (StringHelper.isNullOrEmpty(game)) {
 			return "Bitte Spiel angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(format)) {
+		if (StringHelper.isNullOrEmpty(format)) {
 			return "Bitte Turnierformat angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(mode)) {
+		if (StringHelper.isNullOrEmpty(mode)) {
 			return "Bitte Turniermodus angeben!";
 		}
 
-		if (StringHelper.IsNullOrEmpty(bestOf)) {
+		if (StringHelper.isNullOrEmpty(bestOf)) {
 			return "Bitte Best-Of angeben!";
 		}
 

@@ -19,9 +19,17 @@ create table tournament (
   constraint pk_tournament primary key (id))
 ;
 
+create table user (
+  email                     varchar(255) not null,
+  password                  varchar(255),
+  constraint pk_user primary key (email))
+;
+
 create sequence game_seq;
 
 create sequence tournament_seq;
+
+create sequence user_seq;
 
 alter table tournament add constraint fk_tournament_game_1 foreign key (game_name) references game (name) on delete restrict on update restrict;
 create index ix_tournament_game_1 on tournament (game_name);
@@ -36,9 +44,13 @@ drop table if exists game;
 
 drop table if exists tournament;
 
+drop table if exists user;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists game_seq;
 
 drop sequence if exists tournament_seq;
+
+drop sequence if exists user_seq;
 

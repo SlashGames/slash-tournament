@@ -1,0 +1,17 @@
+@(loginForm: Form[org.slashgames.tournament.auth.formdata.LoginData])
+
+@import org.slashgames.tournament.core.views.html.main
+@import org.slashgames.tournament.core.views.html.forms._
+
+@main("Login") {
+	<h3>Login</h3>
+
+	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.loginSubmit){
+		@formError(loginForm)
+		
+		@formInput("email", "email", "E-mail")
+		@formInput("password", "password", "Password")
+	  	
+	 	@formButton("Login")
+	}
+}

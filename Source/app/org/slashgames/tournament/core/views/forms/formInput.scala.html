@@ -1,0 +1,6 @@
+@(inputType: String, field: String, label: String)
+
+<div class="form-group">
+   	<label for="input-@field">@label</label>
+   	<input type="@inputType" name="@field" class="form-control" id="input-@field" placeholder="@label">
+</div>

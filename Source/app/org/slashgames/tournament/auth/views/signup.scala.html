@@ -1,0 +1,18 @@
+@(signupForm: Form[org.slashgames.tournament.auth.formdata.SignupData])
+
+@import org.slashgames.tournament.core.views.html.main
+@import org.slashgames.tournament.core.views.html.forms._
+
+@main("Registrierung") {
+	<h3>Registrierung</h3>
+
+	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.signupSubmit){
+		@formError(signupForm)
+		
+		@formInput("email", "email", "E-mail")
+		@formInput("password", "password", "Password")
+	  	@formInput("password", "passwordRepeat", "Password wiederholen")
+	  	
+	 	@formButton("Registrieren")
+	}
+}

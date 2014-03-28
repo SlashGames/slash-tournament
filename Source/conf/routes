@@ -8,6 +8,13 @@ GET     /                           org.slashgames.tournament.core.controllers.A
 GET     /tournaments                org.slashgames.tournament.core.controllers.TournamentController.tournaments()
 GET     /tournament/:id             org.slashgames.tournament.core.controllers.TournamentController.tournament(id: Long)
 
+# Authentication
+GET     /login               		org.slashgames.tournament.auth.controllers.LoginController.login()
+POST    /login               		org.slashgames.tournament.auth.controllers.LoginController.loginSubmit()
+GET     /logout               		org.slashgames.tournament.auth.controllers.LoginController.logout()
+GET     /signup               		org.slashgames.tournament.auth.controllers.LoginController.signup()
+POST    /signup               		org.slashgames.tournament.auth.controllers.LoginController.signupSubmit()
+
 # CMS
 GET		/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentCMSController.addTournament()
 POST	/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentCMSController.addTournamentSubmit()

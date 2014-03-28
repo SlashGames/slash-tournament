@@ -1,7 +1,7 @@
 package org.slashgames.tournament.hearthstone.formdata;
 
+import org.slashgames.tournament.core.util.StringHelper;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
-import org.slashgames.tournament.util.StringHelper;
 
 public class HearthstoneParticipationData {
 	public String battleTag;

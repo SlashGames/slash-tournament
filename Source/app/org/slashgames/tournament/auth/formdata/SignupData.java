@@ -1,7 +1,7 @@
 package org.slashgames.tournament.auth.formdata;
 
 import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
-import org.slashgames.tournament.util.StringHelper;
+import org.slashgames.tournament.core.util.StringHelper;
 
 public class SignupData {
 	public String email;

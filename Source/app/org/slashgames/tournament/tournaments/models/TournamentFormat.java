@@ -1,5 +1,6 @@
 package org.slashgames.tournament.tournaments.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,4 +14,7 @@ public class TournamentFormat extends Model {
 	@Constraints.Required
 	@Formats.NonEmpty
 	public String name;
+
+	@Column(length = 32768)
+	public String rules;
 }

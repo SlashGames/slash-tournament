@@ -3,7 +3,7 @@
 @import org.slashgames.tournament.core.views.html.main
 
 @main(tournament.name) {
-	<h3>Informationen</h2>
+	<h3>Informationen</h3>
 	
 	<ul>
 		<li><strong>Spiel:</strong> @tournament.game.name</li>
@@ -13,7 +13,7 @@
 		<li><strong>Judge:</strong> @tournament.judge</li>
 	</ul>
 	
-	<h3>Teilnahme</h2>
+	<h3>Teilnahme</h3>
 	
 	<div>
 		@if(org.slashgames.tournament.auth.controllers.LoginController.isLoggedIn()) {
@@ -30,4 +30,9 @@
 			Du musst eingeloggt sein, um an diesem Turnier teilnehmen zu k&ouml;nnen.
 		}
 	</div>
+	
+	<h3>Regeln</h3>
+	
+	@Html(tournament.game.rules)
+	@Html(tournament.format.rules)
 }

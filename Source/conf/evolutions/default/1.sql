@@ -5,7 +5,7 @@
 
 create table game (
   name                      varchar(255) not null,
-  rules                     varchar(255),
+  rules                     varchar(32768),
   constraint pk_game primary key (name))
 ;
 
@@ -48,6 +48,7 @@ create table tournament (
 
 create table tournament_format (
   name                      varchar(255) not null,
+  rules                     varchar(32768),
   constraint pk_tournament_format primary key (name))
 ;
 

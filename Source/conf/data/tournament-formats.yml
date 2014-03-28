@@ -2,3 +2,6 @@ formats:
 
   - !!org.slashgames.tournament.tournaments.models.TournamentFormat
     name: Swiss
+    rules: <p>Der Sieger einer Begegnung erhält einen Punkt. Begegnungen werden anhand dieser Punkte gesetzt. Keine Begegnung findet doppelt statt. Der Spieler mit den meisten Punkten und dem besten Sieg-Niederlage-Verhältnis gewinnt das Turnier.</p>
+      
+

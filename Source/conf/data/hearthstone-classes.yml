@@ -1,0 +1,6 @@
+classes:
+
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Warrior
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Rogue

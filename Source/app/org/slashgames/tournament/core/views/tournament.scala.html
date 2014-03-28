@@ -15,4 +15,12 @@
 		<li><strong>Ort:</strong> @tournament.location</li>
 		<li><strong>Judge:</strong> @tournament.judge</li>
 	</ul>
+	
+	<h2>Teilnahme</h2>
+	
+	<div>
+		@if(tournament.game.name.equals("Hearthstone")) {
+			<a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participate(tournament.id)">An diesem Turnier teilnehmen</a>
+		}
+	</div>
 }

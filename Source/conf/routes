@@ -15,6 +15,10 @@ GET     /logout               		org.slashgames.tournament.auth.controllers.Login
 GET     /signup               		org.slashgames.tournament.auth.controllers.LoginController.signup()
 POST    /signup               		org.slashgames.tournament.auth.controllers.LoginController.signupSubmit()
 
+# Hearhstone
+GET     /hearthstone/participate/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.participate(id: Long)
+POST    /hearthstone/participate/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.participateSubmit(id: Long)
+
 # CMS
 GET		/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentCMSController.addTournament()
 POST	/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentCMSController.addTournamentSubmit()

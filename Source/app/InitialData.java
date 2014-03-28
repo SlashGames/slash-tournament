@@ -17,6 +17,12 @@ public class InitialData {
 					.load("data/games.yml");
 
 			Ebean.save(data.get("games"));
+
+			// Save Hearthstone classes.
+			data = (Map<String, List<Object>>) Yaml
+					.load("data/hearthstone-classes.yml");
+
+			Ebean.save(data.get("classes"));
 		}
 	}
 }

@@ -1,10 +1,10 @@
-@(field: String, label: String, options: List[String])
+@(form: Form[_], field: String, label: String, options: List[String])
 
 <div class="form-group">
 	<label for="select-@field">@label</label>
        <select name="@field" class="form-control" id="select-@field">
         @for(option <- options) {
-	    	<option>@option</option>
+	    	<option @if(option.equals(form.field(field).value)) { selected }>@option</option>
 		}
     </select>	
 </div>

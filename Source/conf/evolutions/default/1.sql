@@ -9,6 +9,27 @@ create table game (
   constraint pk_game primary key (name))
 ;
 
+create table hearthstone_class (
+  name                      varchar(255) not null,
+  constraint pk_hearthstone_class primary key (name))
+;
+
+create table hearthstone_deck (
+  id                        bigint not null,
+  deck_link                 varchar(255),
+  hero_class_name           varchar(255),
+  constraint pk_hearthstone_deck primary key (id))
+;
+
+create table hearthstone_participation (
+  id                        bigint not null,
+  tournament_id             bigint,
+  participant_email         varchar(255),
+  battle_tag                varchar(255),
+  seed_rank                 integer,
+  constraint pk_hearthstone_participation primary key (id))
+;
+
 create table tournament (
   id                        bigint not null,
   name                      varchar(255),
@@ -27,12 +48,24 @@ create table user (
 
 create sequence game_seq;
 
+create sequence hearthstone_class_seq;
+
+create sequence hearthstone_deck_seq;
+
+create sequence hearthstone_participation_seq;
+
 create sequence tournament_seq;
 
 create sequence user_seq;
 
-alter table tournament add constraint fk_tournament_game_1 foreign key (game_name) references game (name) on delete restrict on update restrict;
-create index ix_tournament_game_1 on tournament (game_name);
+alter table hearthstone_deck add constraint fk_hearthstone_deck_heroClass_1 foreign key (hero_class_name) references hearthstone_class (name) on delete restrict on update restrict;
+create index ix_hearthstone_deck_heroClass_1 on hearthstone_deck (hero_class_name);
+alter table hearthstone_participation add constraint fk_hearthstone_participation_t_2 foreign key (tournament_id) references tournament (id) on delete restrict on update restrict;
+create index ix_hearthstone_participation_t_2 on hearthstone_participation (tournament_id);
+alter table hearthstone_participation add constraint fk_hearthstone_participation_p_3 foreign key (participant_email) references user (email) on delete restrict on update restrict;
+create index ix_hearthstone_participation_p_3 on hearthstone_participation (participant_email);
+alter table tournament add constraint fk_tournament_game_4 foreign key (game_name) references game (name) on delete restrict on update restrict;
+create index ix_tournament_game_4 on tournament (game_name);
 
 
 
@@ -42,6 +75,12 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists game;
 
+drop table if exists hearthstone_class;
+
+drop table if exists hearthstone_deck;
+
+drop table if exists hearthstone_participation;
+
 drop table if exists tournament;
 
 drop table if exists user;
@@ -49,6 +88,12 @@ drop table if exists user;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists game_seq;
+
+drop sequence if exists hearthstone_class_seq;
+
+drop sequence if exists hearthstone_deck_seq;
+
+drop sequence if exists hearthstone_participation_seq;
 
 drop sequence if exists tournament_seq;
 

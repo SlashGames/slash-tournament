@@ -9,8 +9,8 @@
 	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.loginSubmit){
 		@formError(loginForm)
 		
-		@formInput("email", "email", "E-mail")
-		@formInput("password", "password", "Password")
+		@formInput(loginForm, "email", "email", "E-mail")
+		@formInput(loginForm, "password", "password", "Password")
 	  	
 	 	@formButton("Login")
 	}

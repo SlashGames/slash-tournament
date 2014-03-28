@@ -22,9 +22,9 @@ public class TournamentCMSController extends Controller {
 	public static Result addTournamentSubmit() {
 		Form<TournamentData> tournamentForm = form(TournamentData.class)
 				.bindFromRequest();
-		List<String> gameNames = GameModelController.getGameNames();
 
 		if (tournamentForm.hasErrors()) {
+			List<String> gameNames = GameModelController.getGameNames();
 			return badRequest(addTournament.render(tournamentForm, gameNames));
 		} else {
 			TournamentData data = tournamentForm.get();

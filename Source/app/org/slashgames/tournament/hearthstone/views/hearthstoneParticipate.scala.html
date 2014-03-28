@@ -1,0 +1,25 @@
+@(tournamentId: Long, participateForm: Form[org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData], classes: List[String])
+
+@import org.slashgames.tournament.core.views.html._
+@import org.slashgames.tournament.core.views.html.forms._
+
+@main("An Turnier teilnehmen") {
+	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participateSubmit(tournamentId)){
+		@formError(participateForm)
+		
+		@formInput(participateForm, "text", "battleTag", "BattleTag")
+		
+	  	@formInput(participateForm, "text", "deck1Link", "Erste Deckliste")
+	  	@formSelect(participateForm, "deck1Class", "Erste Deckklasse", classes)
+	  	
+	  	@formInput(participateForm, "text", "deck2Link", "Zweite Deckliste")
+	  	@formSelect(participateForm, "deck2Class", "Zweite Deckklasse", classes)
+	  	
+	  	@formInput(participateForm, "text", "deck3Link", "Dritte Deckliste")
+	  	@formSelect(participateForm, "deck3Class", "Dritte Deckklasse", classes)
+	  	
+	  	@formInput(participateForm, "text", "seedRank", "Aktueller Battle.Net-Rang")
+	  			
+	 	@formButton("Teilnehmen")
+	}
+}

@@ -7,11 +7,11 @@
 	@helper.form(org.slashgames.tournament.cms.controllers.routes.TournamentCMSController.addTournamentSubmit){
 		@formError(tournamentForm)
 		
-		@formInput("text", "name", "Turniername")
-	  	@formInput("text", "date", "Datum und Uhrzeit")
-	  	@formInput("text", "location", "Ort")
-	  	@formInput("text", "judge", "Judge")
-	  	@formSelect("game", "Spiel", games)
+		@formInput(tournamentForm, "text", "name", "Turniername")
+	  	@formInput(tournamentForm, "text", "date", "Datum und Uhrzeit")
+	  	@formInput(tournamentForm, "text", "location", "Ort")
+	  	@formInput(tournamentForm, "text", "judge", "Judge")
+	  	@formSelect(tournamentForm, "game", "Spiel", games)
 	  	
 	 	@formButton("Turnier erstellen")
 	}

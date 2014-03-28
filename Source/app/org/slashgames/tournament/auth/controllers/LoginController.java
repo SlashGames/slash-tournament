@@ -59,9 +59,10 @@ public class LoginController extends Controller {
 					.render(signupForm));
 		} else {
 			SignupData data = signupForm.get();
+			String name = data.name;
 			String email = data.email;
 			String password = PasswordEncryption.encryptPassword(data.password);
-			User newUser = UserModelController.addUser(email, password);
+			User newUser = UserModelController.addUser(name, email, password);
 			Logger.info("User added: " + email + " - " + password);
 			session(SESSION_CURRENT_USER, newUser.email);
 

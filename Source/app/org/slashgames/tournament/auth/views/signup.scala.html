@@ -7,6 +7,7 @@
 	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.signupSubmit){
 		@formError(signupForm)
 		
+		@formInput(signupForm, "name", "name", "Name")
 		@formInput(signupForm, "email", "email", "E-mail")
 		@formInput(signupForm, "password", "password", "Password")
 	  	@formInput(signupForm, "password", "passwordRepeat", "Password wiederholen")

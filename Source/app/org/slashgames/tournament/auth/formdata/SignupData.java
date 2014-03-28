@@ -7,6 +7,7 @@ public class SignupData {
 	public String email;
 	public String password;
 	public String passwordRepeat;
+	public String name;
 
 	public String validate() {
 		if (StringHelper.IsNullOrEmpty(email)) {
@@ -19,6 +20,10 @@ public class SignupData {
 
 		if (UserModelController.getUser(email) != null) {
 			return "Benutzer existiert bereits";
+		}
+
+		if (StringHelper.IsNullOrEmpty(name)) {
+			return "Bitte einen Namen angeben!";
 		}
 
 		return null;

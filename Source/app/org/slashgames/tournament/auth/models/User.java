@@ -20,6 +20,10 @@ public class User extends Model {
 	public String email;
 
 	@Constraints.Required
+	@Formats.NonEmpty
+	public String name;
+
+	@Constraints.Required
 	public String password;
 
 	public boolean isAdmin = true;

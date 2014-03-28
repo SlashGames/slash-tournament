@@ -5,7 +5,7 @@
   <li><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournaments()">Turniere</a></li>
   
   @if(org.slashgames.tournament.auth.controllers.LoginController.isLoggedIn()) {
-  	<li><a href="@org.slashgames.tournament.auth.controllers.routes.LoginController.logout()">Logout @org.slashgames.tournament.auth.controllers.LoginController.getCurrentUser().email</a></li>
+  	<li><a href="@org.slashgames.tournament.auth.controllers.routes.LoginController.logout()">Logout @org.slashgames.tournament.auth.controllers.LoginController.getCurrentUser().name</a></li>
   } else {
   	<li><a href="@org.slashgames.tournament.auth.controllers.routes.LoginController.login()">Login</a></li>
   }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slashgames.tournament.auth.controllers.LoginController;
 import org.slashgames.tournament.auth.models.User;
+import org.slashgames.tournament.auth.security.Secured;
 import org.slashgames.tournament.core.modelControllers.TournamentModelController;
 import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
@@ -16,8 +17,10 @@ import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 public class HearthstoneController extends Controller {
+	@Security.Authenticated(Secured.class)
 	public static Result participate(Long tournamentId) {
 		// Prepare form.
 		Form<HearthstoneParticipationData> form = form(HearthstoneParticipationData.class);
@@ -40,6 +43,7 @@ public class HearthstoneController extends Controller {
 				.render(tournamentId, form, classes));
 	}
 
+	@Security.Authenticated(Secured.class)
 	public static Result participateSubmit(Long tournamentId) {
 		Form<HearthstoneParticipationData> participationForm = form(
 				HearthstoneParticipationData.class).bindFromRequest();

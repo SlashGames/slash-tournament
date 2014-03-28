@@ -1,5 +1,6 @@
 package org.slashgames.tournament.cms.formdata;
 
+import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.util.StringHelper;
 
 public class TournamentData {
@@ -35,5 +36,13 @@ public class TournamentData {
 		}
 
 		return null;
+	}
+
+	public void fill(Tournament tournament) {
+		this.date = tournament.date;
+		this.game = tournament.game.name;
+		this.judge = tournament.judge;
+		this.location = tournament.location;
+		this.name = tournament.name;
 	}
 }

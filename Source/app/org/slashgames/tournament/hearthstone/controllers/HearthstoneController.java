@@ -61,7 +61,7 @@ public class HearthstoneController extends Controller {
 			Tournament tournament = TournamentModelController
 					.findById(tournamentId);
 
-			HearthstoneParticipationModelController.addOrUpdateParticipant(
+			HearthstoneParticipationModelController.addOrUpdateParticipation(
 					participant, tournament, data);
 			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
 					.tournament(tournamentId));

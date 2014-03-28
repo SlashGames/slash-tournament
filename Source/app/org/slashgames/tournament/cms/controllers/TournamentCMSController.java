@@ -7,22 +7,38 @@ import java.util.List;
 import org.slashgames.tournament.auth.security.SecuredAdmin;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addTournament;
+import org.slashgames.tournament.cms.views.html.editTournament;
 import org.slashgames.tournament.core.modelControllers.GameModelController;
 import org.slashgames.tournament.core.modelControllers.TournamentModelController;
+import org.slashgames.tournament.core.models.Tournament;
 
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
+@Security.Authenticated(SecuredAdmin.class)
 public class TournamentCMSController extends Controller {
-	@Security.Authenticated(SecuredAdmin.class)
+
 	public static Result addTournament() {
 		List<String> gameNames = GameModelController.getGameNames();
 		return ok(addTournament.render(form(TournamentData.class), gameNames));
 	}
 
-	@Security.Authenticated(SecuredAdmin.class)
+	public static Result editTournament(Long id) {
+		// Create form.
+		Form<TournamentData> form = form(TournamentData.class);
+		List<String> gameNames = GameModelController.getGameNames();
+
+		// Fill form.
+		Tournament tournament = TournamentModelController.findById(id);
+		TournamentData data = new TournamentData();
+		data.fill(tournament);
+		form = form.fill(data);
+
+		return ok(editTournament.render(id, form, gameNames));
+	}
+
 	public static Result addTournamentSubmit() {
 		Form<TournamentData> tournamentForm = form(TournamentData.class)
 				.bindFromRequest();
@@ -33,6 +49,22 @@ public class TournamentCMSController extends Controller {
 		} else {
 			TournamentData data = tournamentForm.get();
 			TournamentModelController.addTournament(data);
+			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
+					.tournaments());
+		}
+	}
+
+	public static Result editTournamentSubmit(Long id) {
+		Form<TournamentData> tournamentForm = form(TournamentData.class)
+				.bindFromRequest();
+
+		if (tournamentForm.hasErrors()) {
+			List<String> gameNames = GameModelController.getGameNames();
+			return badRequest(editTournament.render(id, tournamentForm, gameNames));
+		} else {
+			Tournament tournament = TournamentModelController.findById(id);
+			TournamentData data = tournamentForm.get();
+			TournamentModelController.updateTournament(tournament, data);
 			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
 					.tournaments());
 		}

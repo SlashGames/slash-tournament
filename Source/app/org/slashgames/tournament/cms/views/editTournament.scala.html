@@ -1,0 +1,18 @@
+@(id: Long, tournamentForm: Form[org.slashgames.tournament.cms.formdata.TournamentData], games: List[String])
+
+@import org.slashgames.tournament.core.views.html._
+@import org.slashgames.tournament.core.views.html.forms._
+
+@main("Turnier bearbeiten") {
+	@helper.form(org.slashgames.tournament.cms.controllers.routes.TournamentCMSController.editTournamentSubmit(id)){
+		@formError(tournamentForm)
+		
+		@formInput(tournamentForm, "text", "name", "Turniername")
+	  	@formInput(tournamentForm, "text", "date", "Datum und Uhrzeit")
+	  	@formInput(tournamentForm, "text", "location", "Ort")
+	  	@formInput(tournamentForm, "text", "judge", "Judge")
+	  	@formSelect(tournamentForm, "game", "Spiel", games)
+	  	
+	 	@formButton("Turnier aktualisieren")
+	}
+}

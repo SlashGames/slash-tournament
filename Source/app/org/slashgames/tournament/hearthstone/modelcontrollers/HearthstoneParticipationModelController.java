@@ -22,7 +22,7 @@ public class HearthstoneParticipationModelController {
 		return getParticipation(user, tournament) != null;
 	}
 
-	public static void addOrUpdateParticipant(User participant,
+	public static void addOrUpdateParticipation(User participant,
 			Tournament tournament, HearthstoneParticipationData data) {
 
 		HearthstoneParticipation participation = getParticipation(participant,

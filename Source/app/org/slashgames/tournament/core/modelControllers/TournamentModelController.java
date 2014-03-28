@@ -21,6 +21,11 @@ public class TournamentModelController {
 
 	public static void addTournament(TournamentData data) {
 		Tournament tournament = new Tournament();
+		updateTournament(tournament, data);
+	}
+
+	public static void updateTournament(Tournament tournament,
+			TournamentData data) {
 		tournament.name = data.name;
 		tournament.date = data.date;
 		tournament.location = data.location;

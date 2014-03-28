@@ -1,5 +1,6 @@
 package org.slashgames.tournament.hearthstone.formdata;
 
+import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import org.slashgames.tournament.util.StringHelper;
 
 public class HearthstoneParticipationData {
@@ -42,5 +43,16 @@ public class HearthstoneParticipationData {
 		}
 
 		return null;
+	}
+
+	public void fill(HearthstoneParticipation data) {
+		this.battleTag = data.battleTag;
+		this.deck1Class = data.deck1.heroClass.name;
+		this.deck1Link = data.deck1.deckLink;
+		this.deck2Class = data.deck2.heroClass.name;
+		this.deck2Link = data.deck2.deckLink;
+		this.deck3Class = data.deck3.heroClass.name;
+		this.deck3Link = data.deck3.deckLink;
+		this.seedRank = Integer.toString(data.seedRank);
 	}
 }

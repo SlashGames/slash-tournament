@@ -11,6 +11,7 @@ import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneClassModelController;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
+import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 
 import play.data.Form;
 import play.mvc.Controller;
@@ -18,29 +19,46 @@ import play.mvc.Result;
 
 public class HearthstoneController extends Controller {
 	public static Result participate(Long tournamentId) {
+		// Prepare form.
+		Form<HearthstoneParticipationData> form = form(HearthstoneParticipationData.class);
 		List<String> classes = HearthstoneClassModelController.getClassNames();
+
+		// Check whether already participating.
+		User participant = LoginController.getCurrentUser();
+		Tournament tournament = TournamentModelController
+				.findById(tournamentId);
+		HearthstoneParticipation participation = HearthstoneParticipationModelController
+				.getParticipation(participant, tournament);
+
+		if (participation != null) {
+			HearthstoneParticipationData data = new HearthstoneParticipationData();
+			data.fill(participation);
+			form = form.fill(data);
+		}
+
 		return ok(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipate
-				.render(tournamentId, form(HearthstoneParticipationData.class),
-						classes));
+				.render(tournamentId, form, classes));
 	}
 
 	public static Result participateSubmit(Long tournamentId) {
 		Form<HearthstoneParticipationData> participationForm = form(
 				HearthstoneParticipationData.class).bindFromRequest();
 
+		// Check for errors.
 		if (participationForm.hasErrors()) {
 			List<String> classes = HearthstoneClassModelController
 					.getClassNames();
 			return badRequest(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipate
 					.render(tournamentId, participationForm, classes));
 		} else {
+			// Get form data.
 			HearthstoneParticipationData data = participationForm.get();
 			User participant = LoginController.getCurrentUser();
 			Tournament tournament = TournamentModelController
 					.findById(tournamentId);
 
-			HearthstoneParticipationModelController.addParticipant(participant,
-					tournament, data);
+			HearthstoneParticipationModelController.addOrUpdateParticipant(
+					participant, tournament, data);
 			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
 					.tournament(tournamentId));
 		}

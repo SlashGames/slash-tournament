@@ -12,14 +12,25 @@ public class HearthstoneParticipationModelController {
 	private static Model.Finder<Long, HearthstoneParticipation> find = new Model.Finder<Long, HearthstoneParticipation>(
 			Long.class, HearthstoneParticipation.class);
 
-	public static boolean isParticipating(User user, Tournament tournament) {
+	public static HearthstoneParticipation getParticipation(User user,
+			Tournament tournament) {
 		return find.where().eq("participant", user)
-				.eq("tournament", tournament).findUnique() != null;
+				.eq("tournament", tournament).findUnique();
 	}
 
-	public static void addParticipant(User participant, Tournament tournament,
-			HearthstoneParticipationData data) {
-		HearthstoneParticipation participation = new HearthstoneParticipation();
+	public static boolean isParticipating(User user, Tournament tournament) {
+		return getParticipation(user, tournament) != null;
+	}
+
+	public static void addOrUpdateParticipant(User participant,
+			Tournament tournament, HearthstoneParticipationData data) {
+
+		HearthstoneParticipation participation = getParticipation(participant,
+				tournament);
+
+		if (participation == null) {
+			participation = new HearthstoneParticipation();
+		}
 
 		participation.participant = participant;
 		participation.tournament = tournament;
@@ -30,16 +41,19 @@ public class HearthstoneParticipationModelController {
 		participation.deck1.deckLink = data.deck1Link;
 		participation.deck1.heroClass = HearthstoneClassModelController
 				.findByName(data.deck1Class);
+		participation.deck1.save();
 
 		participation.deck2 = new HearthstoneDeck();
 		participation.deck2.deckLink = data.deck2Link;
 		participation.deck2.heroClass = HearthstoneClassModelController
 				.findByName(data.deck2Class);
+		participation.deck2.save();
 
 		participation.deck3 = new HearthstoneDeck();
 		participation.deck3.deckLink = data.deck3Link;
 		participation.deck3.heroClass = HearthstoneClassModelController
 				.findByName(data.deck3Class);
+		participation.deck3.save();
 
 		participation.seedRank = Integer.parseInt(data.seedRank);
 

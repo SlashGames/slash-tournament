@@ -3,6 +3,7 @@ package org.slashgames.tournament.hearthstone.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.core.models.Tournament;
@@ -22,10 +23,14 @@ public class HearthstoneParticipation extends Model {
 
 	public String battleTag;
 
+	@OneToOne
 	public HearthstoneDeck deck1;
+
+	@OneToOne
 	public HearthstoneDeck deck2;
+
+	@OneToOne
 	public HearthstoneDeck deck3;
 
 	public Integer seedRank;
-
 }

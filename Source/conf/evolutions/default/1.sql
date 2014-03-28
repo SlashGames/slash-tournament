@@ -26,6 +26,9 @@ create table hearthstone_participation (
   tournament_id             bigint,
   participant_email         varchar(255),
   battle_tag                varchar(255),
+  deck1_id                  bigint,
+  deck2_id                  bigint,
+  deck3_id                  bigint,
   seed_rank                 integer,
   constraint pk_hearthstone_participation primary key (id))
 ;
@@ -64,8 +67,14 @@ alter table hearthstone_participation add constraint fk_hearthstone_participatio
 create index ix_hearthstone_participation_t_2 on hearthstone_participation (tournament_id);
 alter table hearthstone_participation add constraint fk_hearthstone_participation_p_3 foreign key (participant_email) references user (email) on delete restrict on update restrict;
 create index ix_hearthstone_participation_p_3 on hearthstone_participation (participant_email);
-alter table tournament add constraint fk_tournament_game_4 foreign key (game_name) references game (name) on delete restrict on update restrict;
-create index ix_tournament_game_4 on tournament (game_name);
+alter table hearthstone_participation add constraint fk_hearthstone_participation_d_4 foreign key (deck1_id) references hearthstone_deck (id) on delete restrict on update restrict;
+create index ix_hearthstone_participation_d_4 on hearthstone_participation (deck1_id);
+alter table hearthstone_participation add constraint fk_hearthstone_participation_d_5 foreign key (deck2_id) references hearthstone_deck (id) on delete restrict on update restrict;
+create index ix_hearthstone_participation_d_5 on hearthstone_participation (deck2_id);
+alter table hearthstone_participation add constraint fk_hearthstone_participation_d_6 foreign key (deck3_id) references hearthstone_deck (id) on delete restrict on update restrict;
+create index ix_hearthstone_participation_d_6 on hearthstone_participation (deck3_id);
+alter table tournament add constraint fk_tournament_game_7 foreign key (game_name) references game (name) on delete restrict on update restrict;
+create index ix_tournament_game_7 on tournament (game_name);
 
 
 

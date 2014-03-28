@@ -1,5 +1,5 @@
 games:
 
-  - &Hearthstone !!org.slashgames.tournament.core.models.Game
+  - &Hearthstone !!org.slashgames.tournament.tournaments.models.Game
     name: Hearthstone
     rules: 

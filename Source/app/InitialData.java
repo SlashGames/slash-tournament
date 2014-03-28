@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Map;
 
-import org.slashgames.tournament.core.models.Game;
+import org.slashgames.tournament.tournaments.models.Game;
 
 import play.Application;
 import play.libs.Yaml;

@@ -1,7 +1,7 @@
 package org.slashgames.tournament.cms.formdata;
 
-import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.core.util.StringHelper;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 public class TournamentData {
 	public String name;

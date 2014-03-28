@@ -5,15 +5,16 @@
 # Home page
 GET     /                           org.slashgames.tournament.core.controllers.Application.index()
 
-GET     /tournaments                org.slashgames.tournament.core.controllers.TournamentController.tournaments()
-GET     /tournament/:id             org.slashgames.tournament.core.controllers.TournamentController.tournament(id: Long)
+# Tournaments
+GET     /tournament/all             org.slashgames.tournament.tournaments.controllers.TournamentController.tournaments()
+GET     /tournament/:id             org.slashgames.tournament.tournaments.controllers.TournamentController.tournament(id: Long)
 
 # Authentication
-GET     /login               		org.slashgames.tournament.auth.controllers.LoginController.login()
-POST    /login               		org.slashgames.tournament.auth.controllers.LoginController.loginSubmit()
-GET     /logout               		org.slashgames.tournament.auth.controllers.LoginController.logout()
-GET     /signup               		org.slashgames.tournament.auth.controllers.LoginController.signup()
-POST    /signup               		org.slashgames.tournament.auth.controllers.LoginController.signupSubmit()
+GET     /auth/login               		org.slashgames.tournament.auth.controllers.LoginController.login()
+POST    /auth/login               		org.slashgames.tournament.auth.controllers.LoginController.loginSubmit()
+GET     /auth/logout               		org.slashgames.tournament.auth.controllers.LoginController.logout()
+GET     /auth/signup               		org.slashgames.tournament.auth.controllers.LoginController.signup()
+POST    /auth/signup               		org.slashgames.tournament.auth.controllers.LoginController.signupSubmit()
 
 # Hearhstone
 GET     /hearthstone/participate/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.participate(id: Long)

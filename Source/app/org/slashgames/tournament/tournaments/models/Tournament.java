@@ -1,4 +1,4 @@
-package org.slashgames.tournament.core.models;
+package org.slashgames.tournament.tournaments.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

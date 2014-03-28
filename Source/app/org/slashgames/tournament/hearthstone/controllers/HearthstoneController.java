@@ -7,12 +7,12 @@ import java.util.List;
 import org.slashgames.tournament.auth.controllers.LoginController;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.auth.security.Secured;
-import org.slashgames.tournament.core.modelControllers.TournamentModelController;
-import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneClassModelController;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
+import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.data.Form;
 import play.mvc.Controller;
@@ -63,7 +63,7 @@ public class HearthstoneController extends Controller {
 
 			HearthstoneParticipationModelController.addOrUpdateParticipation(
 					participant, tournament, data);
-			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
+			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
 					.tournament(tournamentId));
 		}
 	}

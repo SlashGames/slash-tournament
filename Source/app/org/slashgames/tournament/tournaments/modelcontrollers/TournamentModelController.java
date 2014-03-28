@@ -1,9 +1,9 @@
-package org.slashgames.tournament.core.modelControllers;
+package org.slashgames.tournament.tournaments.modelcontrollers;
 
 import java.util.List;
 
 import org.slashgames.tournament.cms.formdata.TournamentData;
-import org.slashgames.tournament.core.models.Tournament;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.db.ebean.Model;
 

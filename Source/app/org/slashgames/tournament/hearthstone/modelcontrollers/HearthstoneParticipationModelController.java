@@ -1,10 +1,10 @@
 package org.slashgames.tournament.hearthstone.modelcontrollers;
 
 import org.slashgames.tournament.auth.models.User;
-import org.slashgames.tournament.core.models.Tournament;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.models.HearthstoneDeck;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.db.ebean.Model;
 

@@ -8,9 +8,9 @@ import org.slashgames.tournament.auth.security.SecuredAdmin;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addTournament;
 import org.slashgames.tournament.cms.views.html.editTournament;
-import org.slashgames.tournament.core.modelControllers.GameModelController;
-import org.slashgames.tournament.core.modelControllers.TournamentModelController;
-import org.slashgames.tournament.core.models.Tournament;
+import org.slashgames.tournament.tournaments.modelcontrollers.GameModelController;
+import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.data.Form;
 import play.mvc.Controller;
@@ -49,7 +49,7 @@ public class TournamentCMSController extends Controller {
 		} else {
 			TournamentData data = tournamentForm.get();
 			TournamentModelController.addTournament(data);
-			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
+			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
 					.tournaments());
 		}
 	}
@@ -60,12 +60,13 @@ public class TournamentCMSController extends Controller {
 
 		if (tournamentForm.hasErrors()) {
 			List<String> gameNames = GameModelController.getGameNames();
-			return badRequest(editTournament.render(id, tournamentForm, gameNames));
+			return badRequest(editTournament.render(id, tournamentForm,
+					gameNames));
 		} else {
 			Tournament tournament = TournamentModelController.findById(id);
 			TournamentData data = tournamentForm.get();
 			TournamentModelController.updateTournament(tournament, data);
-			return redirect(org.slashgames.tournament.core.controllers.routes.TournamentController
+			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
 					.tournaments());
 		}
 	}

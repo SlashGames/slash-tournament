@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.slashgames.tournament.auth.models.User;
-import org.slashgames.tournament.core.models.Tournament;
+import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.db.ebean.Model;
 

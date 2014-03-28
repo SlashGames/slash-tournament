@@ -2,7 +2,7 @@
 
 <ul class="nav nav-tabs">
   <li><a href="@org.slashgames.tournament.core.controllers.routes.Application.index()">Home</a></li>
-  <li><a href="@org.slashgames.tournament.core.controllers.routes.TournamentController.tournaments()">Turniere</a></li>
+  <li><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournaments()">Turniere</a></li>
   
   @if(org.slashgames.tournament.auth.controllers.LoginController.isLoggedIn()) {
   	<li><a href="@org.slashgames.tournament.auth.controllers.routes.LoginController.logout()">Logout @org.slashgames.tournament.auth.controllers.LoginController.getCurrentUser().email</a></li>

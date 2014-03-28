@@ -43,6 +43,7 @@ create table tournament (
   format_name               varchar(255),
   mode_name                 varchar(255),
   best_of                   integer,
+  rules                     varchar(32768),
   constraint pk_tournament primary key (id))
 ;
 

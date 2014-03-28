@@ -2,15 +2,10 @@ package org.slashgames.tournament.cms.controllers;
 
 import static play.data.Form.form;
 
-import java.util.List;
-
 import org.slashgames.tournament.auth.security.SecuredAdmin;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addTournament;
 import org.slashgames.tournament.cms.views.html.editTournament;
-import org.slashgames.tournament.tournaments.modelcontrollers.GameModelController;
-import org.slashgames.tournament.tournaments.modelcontrollers.TournamentFormatModelController;
-import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModeModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
@@ -58,11 +53,6 @@ public class TournamentCMSController extends Controller {
 				.bindFromRequest();
 
 		if (tournamentForm.hasErrors()) {
-			List<String> gameNames = GameModelController.getGameNames();
-			List<String> formatNames = TournamentFormatModelController
-					.getFormatNames();
-			List<String> modeNames = TournamentModeModelController
-					.getModeNames();
 			return badRequest(editTournament.render(id, tournamentForm));
 		} else {
 			Tournament tournament = TournamentModelController.findById(id);

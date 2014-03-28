@@ -20,6 +20,8 @@ public class TournamentData {
 
 	public String bestOf;
 
+	public String rules;
+
 	public String validate() {
 		if (StringHelper.IsNullOrEmpty(name)) {
 			return "Bitte Turniernamen angeben!";
@@ -75,5 +77,6 @@ public class TournamentData {
 		this.bestOf = String.valueOf(tournament.bestOf);
 		this.format = tournament.format.name;
 		this.mode = tournament.mode.name;
+		this.rules = tournament.rules;
 	}
 }

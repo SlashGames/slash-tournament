@@ -1,5 +1,6 @@
 package org.slashgames.tournament.tournaments.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -29,4 +30,7 @@ public class Tournament extends Model {
 	public TournamentMode mode;
 
 	public Integer bestOf;
+
+	@Column(length = 32768)
+	public String rules;
 }

@@ -1,0 +1,6 @@
+@(form: Form[_], field: String, label: String, rows: Integer)
+
+<div class="form-group">
+   	<label for="textarea-@field">@label</label>
+   	<textarea id="textarea-@field" name="@field" class="form-control" rows="@rows">@form.field(field).value</textarea>
+</div>

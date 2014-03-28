@@ -35,6 +35,7 @@ public class TournamentModelController {
 		tournament.format = TournamentFormatModelController
 				.findByName(data.format);
 		tournament.mode = TournamentModeModelController.findByName(data.mode);
+		tournament.rules = data.rules;
 		tournament.save();
 	}
 }

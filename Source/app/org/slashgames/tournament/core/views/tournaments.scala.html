@@ -1,0 +1,15 @@
+@(tournaments: List[org.slashgames.tournament.core.models.Tournament])
+
+@import org.slashgames.tournament.core.views.html.main
+
+@main("Turniere") {
+	<h1>Turniere</h1>
+	
+	@for(tournament <- tournaments) {
+		<div class="row">
+		   	<div class="col-md-2">
+				@tournament.name
+			</div>
+	    </div>
+	}
+}

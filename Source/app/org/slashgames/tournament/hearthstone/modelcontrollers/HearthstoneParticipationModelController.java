@@ -1,5 +1,7 @@
 package org.slashgames.tournament.hearthstone.modelcontrollers;
 
+import java.util.List;
+
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.models.HearthstoneDeck;
@@ -11,6 +13,11 @@ import play.db.ebean.Model;
 public class HearthstoneParticipationModelController {
 	private static Model.Finder<Long, HearthstoneParticipation> find = new Model.Finder<Long, HearthstoneParticipation>(
 			Long.class, HearthstoneParticipation.class);
+
+	public static List<HearthstoneParticipation> getParticipations(
+			Tournament tournament) {
+		return find.where().eq("tournament", tournament).findList();
+	}
 
 	public static HearthstoneParticipation getParticipation(User user,
 			Tournament tournament) {

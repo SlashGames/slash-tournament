@@ -41,4 +41,25 @@
 	
 	<h4>Turnierregeln</h4>
 	<p>@tournament.rules</p>
+	
+	<h3>Teilnehmer</h3>
+
+	<div class="row">
+	   	<div class="col-md-2"><strong>Name</strong></div>
+	   	<div class="col-md-2"><strong>BattleTag</strong></div>
+	   	<div class="col-md-2"><strong>Klassen</strong></div>
+    </div>
+    	
+	@if(tournament.game.name.equals("Hearthstone")) {
+		@for(participation <- org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController.getParticipations(tournament)) {
+			<div class="row">
+			   	<div class="col-md-2">@participation.participant.name</div>		
+			   	<div class="col-md-2">@participation.battleTag</div>
+			   	<div class="col-md-2">@participation.deck1.heroClass.name, @participation.deck2.heroClass.name, @participation.deck3.heroClass.name</div>
+		    </div>
+		}
+	}
+	
+	<p></p>
+	<p>Die Decklisten der Teilnehmer werden verf&uuml;gbar, sobald der Turnier beendet ist.</p>
 }

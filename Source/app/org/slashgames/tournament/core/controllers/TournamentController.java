@@ -15,4 +15,10 @@ public class TournamentController extends Controller {
 		return ok(org.slashgames.tournament.core.views.html.tournaments
 				.render(tournaments));
 	}
+
+	public static Result tournament(Long id) {
+		Tournament tournament = TournamentModelController.findById(id);
+		return ok(org.slashgames.tournament.core.views.html.tournament
+				.render(tournament));
+	}
 }

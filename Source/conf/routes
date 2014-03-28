@@ -6,6 +6,7 @@
 GET     /                           org.slashgames.tournament.core.controllers.Application.index()
 
 GET     /tournaments                org.slashgames.tournament.core.controllers.TournamentController.tournaments()
+GET     /tournament/:id             org.slashgames.tournament.core.controllers.TournamentController.tournament(id: Long)
 
 # CMS
 GET		/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentCMSController.addTournament()

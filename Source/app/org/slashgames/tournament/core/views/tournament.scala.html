@@ -1,0 +1,18 @@
+@(tournament: org.slashgames.tournament.core.models.Tournament)
+
+@import org.slashgames.tournament.core.views.html.main
+
+@main(tournament.name) {
+	<div class="page-header">
+		<h1>@tournament.name <small>@tournament.date</small></h1>
+	</div>
+	
+	<h2>Informationen</h2>
+	
+	<ul>
+		<li><strong>Spiel:</strong> @tournament.game.name</li>
+		<li><strong>Datum:</strong> @tournament.date</li>
+		<li><strong>Ort:</strong> @tournament.location</li>
+		<li><strong>Judge:</strong> @tournament.judge</li>
+	</ul>
+}

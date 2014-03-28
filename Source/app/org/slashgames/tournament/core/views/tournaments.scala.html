@@ -10,7 +10,7 @@
 	   	<div class="col-md-2"><strong>Spiel</strong></div>
 	   	<div class="col-md-2"><strong>Datum</strong></div>
 	   	<div class="col-md-2"><strong>Ort</strong></div>
-	   	<div class="col-md-2"><strong>Judge</strong></div>			
+	   	<div class="col-md-2"><strong>Details</strong></div>			
     </div>
 	    
 	@for(tournament <- tournaments) {
@@ -19,7 +19,7 @@
 		   	<div class="col-md-2">@if(tournament.game != null) { @tournament.game.name }</div>
 		   	<div class="col-md-2">@tournament.date</div>
 		   	<div class="col-md-2">@tournament.location</div>
-		   	<div class="col-md-2">@tournament.judge</div>			
+		   	<div class="col-md-2"><a href="@org.slashgames.tournament.core.controllers.routes.TournamentController.tournament(tournament.id)">Details</a></div>			
 	    </div>
 	}
 }

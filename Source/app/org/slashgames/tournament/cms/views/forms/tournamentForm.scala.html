@@ -1,0 +1,18 @@
+@(theForm: Form[org.slashgames.tournament.cms.formdata.TournamentData], call: play.api.mvc.Call, buttonCaption: String)
+
+@import org.slashgames.tournament.core.views.html.forms._
+
+@helper.form(call){
+	@formError(theForm)
+	
+	@formInput(theForm, "text", "name", "Turniername")
+  	@formSelect(theForm, "game", "Spiel", org.slashgames.tournament.tournaments.modelcontrollers.GameModelController.getGameNames())
+  	@formInput(theForm, "text", "date", "Datum und Uhrzeit")
+  	@formInput(theForm, "text", "location", "Ort")
+  	@formSelect(theForm, "format", "Format", org.slashgames.tournament.tournaments.modelcontrollers.TournamentFormatModelController.getFormatNames())
+  	@formInput(theForm, "text", "bestOf", "Best Of")
+  	@formSelect(theForm, "mode", "Modus", org.slashgames.tournament.tournaments.modelcontrollers.TournamentModeModelController.getModeNames())
+  	@formInput(theForm, "text", "judge", "Judge")
+
+ 	@formButton(buttonCaption)
+}

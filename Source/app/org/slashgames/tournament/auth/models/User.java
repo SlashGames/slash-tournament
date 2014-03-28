@@ -22,7 +22,7 @@ public class User extends Model {
 	@Constraints.Required
 	public String password;
 
-	public boolean isAdmin;
+	public boolean isAdmin = true;
 
 	public User(String email, String password) {
 		this.email = email;

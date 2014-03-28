@@ -21,4 +21,12 @@ public class Tournament extends Model {
 
 	@ManyToOne
 	public Game game;
+
+	@ManyToOne
+	public TournamentFormat format;
+
+	@ManyToOne
+	public TournamentMode mode;
+
+	public Integer bestOf;
 }

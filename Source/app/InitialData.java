@@ -23,6 +23,17 @@ public class InitialData {
 					.load("data/hearthstone-classes.yml");
 
 			Ebean.save(data.get("classes"));
+
+			// Save Tournament data.
+			data = (Map<String, List<Object>>) Yaml
+					.load("data/tournament-formats.yml");
+
+			Ebean.save(data.get("formats"));
+
+			data = (Map<String, List<Object>>) Yaml
+					.load("data/tournament-modes.yml");
+
+			Ebean.save(data.get("modes"));
 		}
 	}
 }

@@ -31,6 +31,10 @@ public class TournamentModelController {
 		tournament.location = data.location;
 		tournament.judge = data.judge;
 		tournament.game = GameModelController.findByName(data.game);
+		tournament.bestOf = Integer.parseInt(data.bestOf);
+		tournament.format = TournamentFormatModelController
+				.findByName(data.format);
+		tournament.mode = TournamentModeModelController.findByName(data.mode);
 		tournament.save();
 	}
 }

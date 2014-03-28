@@ -14,6 +14,12 @@ public class TournamentData {
 
 	public String game;
 
+	public String format;
+
+	public String mode;
+
+	public String bestOf;
+
 	public String validate() {
 		if (StringHelper.IsNullOrEmpty(name)) {
 			return "Bitte Turniernamen angeben!";
@@ -35,6 +41,28 @@ public class TournamentData {
 			return "Bitte Spiel angeben!";
 		}
 
+		if (StringHelper.IsNullOrEmpty(format)) {
+			return "Bitte Turnierformat angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(mode)) {
+			return "Bitte Turniermodus angeben!";
+		}
+
+		if (StringHelper.IsNullOrEmpty(bestOf)) {
+			return "Bitte Best-Of angeben!";
+		}
+
+		try {
+			int bo = Integer.parseInt(bestOf);
+
+			if (bo < 0 || bo % 2 == 0) {
+				return "Bitte gültiges Best-Of (1,3,5,...) angeben!";
+			}
+		} catch (NumberFormatException e) {
+			return "Bitte gültiges Best-Of (1,3,5,...) angeben!";
+		}
+
 		return null;
 	}
 
@@ -44,5 +72,8 @@ public class TournamentData {
 		this.judge = tournament.judge;
 		this.location = tournament.location;
 		this.name = tournament.name;
+		this.bestOf = String.valueOf(tournament.bestOf);
+		this.format = tournament.format.name;
+		this.mode = tournament.mode.name;
 	}
 }

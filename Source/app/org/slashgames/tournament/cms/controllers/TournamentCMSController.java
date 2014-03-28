@@ -9,6 +9,8 @@ import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addTournament;
 import org.slashgames.tournament.cms.views.html.editTournament;
 import org.slashgames.tournament.tournaments.modelcontrollers.GameModelController;
+import org.slashgames.tournament.tournaments.modelcontrollers.TournamentFormatModelController;
+import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModeModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
@@ -21,14 +23,12 @@ import play.mvc.Security;
 public class TournamentCMSController extends Controller {
 
 	public static Result addTournament() {
-		List<String> gameNames = GameModelController.getGameNames();
-		return ok(addTournament.render(form(TournamentData.class), gameNames));
+		return ok(addTournament.render(form(TournamentData.class)));
 	}
 
 	public static Result editTournament(Long id) {
 		// Create form.
 		Form<TournamentData> form = form(TournamentData.class);
-		List<String> gameNames = GameModelController.getGameNames();
 
 		// Fill form.
 		Tournament tournament = TournamentModelController.findById(id);
@@ -36,7 +36,7 @@ public class TournamentCMSController extends Controller {
 		data.fill(tournament);
 		form = form.fill(data);
 
-		return ok(editTournament.render(id, form, gameNames));
+		return ok(editTournament.render(id, form));
 	}
 
 	public static Result addTournamentSubmit() {
@@ -44,8 +44,7 @@ public class TournamentCMSController extends Controller {
 				.bindFromRequest();
 
 		if (tournamentForm.hasErrors()) {
-			List<String> gameNames = GameModelController.getGameNames();
-			return badRequest(addTournament.render(tournamentForm, gameNames));
+			return badRequest(addTournament.render(tournamentForm));
 		} else {
 			TournamentData data = tournamentForm.get();
 			TournamentModelController.addTournament(data);
@@ -60,8 +59,11 @@ public class TournamentCMSController extends Controller {
 
 		if (tournamentForm.hasErrors()) {
 			List<String> gameNames = GameModelController.getGameNames();
-			return badRequest(editTournament.render(id, tournamentForm,
-					gameNames));
+			List<String> formatNames = TournamentFormatModelController
+					.getFormatNames();
+			List<String> modeNames = TournamentModeModelController
+					.getModeNames();
+			return badRequest(editTournament.render(id, tournamentForm));
 		} else {
 			Tournament tournament = TournamentModelController.findById(id);
 			TournamentData data = tournamentForm.get();

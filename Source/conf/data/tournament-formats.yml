@@ -1,0 +1,4 @@
+formats:
+
+  - !!org.slashgames.tournament.tournaments.models.TournamentFormat
+    name: Swiss

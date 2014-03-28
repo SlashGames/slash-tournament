@@ -40,7 +40,20 @@ create table tournament (
   location                  varchar(255),
   judge                     varchar(255),
   game_name                 varchar(255),
+  format_name               varchar(255),
+  mode_name                 varchar(255),
+  best_of                   integer,
   constraint pk_tournament primary key (id))
+;
+
+create table tournament_format (
+  name                      varchar(255) not null,
+  constraint pk_tournament_format primary key (name))
+;
+
+create table tournament_mode (
+  name                      varchar(255) not null,
+  constraint pk_tournament_mode primary key (name))
 ;
 
 create table user (
@@ -60,6 +73,10 @@ create sequence hearthstone_participation_seq;
 
 create sequence tournament_seq;
 
+create sequence tournament_format_seq;
+
+create sequence tournament_mode_seq;
+
 create sequence user_seq;
 
 alter table hearthstone_deck add constraint fk_hearthstone_deck_heroClass_1 foreign key (hero_class_name) references hearthstone_class (name) on delete restrict on update restrict;
@@ -76,6 +93,10 @@ alter table hearthstone_participation add constraint fk_hearthstone_participatio
 create index ix_hearthstone_participation_d_6 on hearthstone_participation (deck3_id);
 alter table tournament add constraint fk_tournament_game_7 foreign key (game_name) references game (name) on delete restrict on update restrict;
 create index ix_tournament_game_7 on tournament (game_name);
+alter table tournament add constraint fk_tournament_format_8 foreign key (format_name) references tournament_format (name) on delete restrict on update restrict;
+create index ix_tournament_format_8 on tournament (format_name);
+alter table tournament add constraint fk_tournament_mode_9 foreign key (mode_name) references tournament_mode (name) on delete restrict on update restrict;
+create index ix_tournament_mode_9 on tournament (mode_name);
 
 
 
@@ -93,6 +114,10 @@ drop table if exists hearthstone_participation;
 
 drop table if exists tournament;
 
+drop table if exists tournament_format;
+
+drop table if exists tournament_mode;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -106,6 +131,10 @@ drop sequence if exists hearthstone_deck_seq;
 drop sequence if exists hearthstone_participation_seq;
 
 drop sequence if exists tournament_seq;
+
+drop sequence if exists tournament_format_seq;
+
+drop sequence if exists tournament_mode_seq;
 
 drop sequence if exists user_seq;
 

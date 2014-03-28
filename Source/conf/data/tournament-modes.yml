@@ -1,0 +1,4 @@
+modes:
+
+  - !!org.slashgames.tournament.tournaments.models.TournamentMode
+    name: 1v1

@@ -57,7 +57,11 @@
 			<div class="row">
 			   	<div class="col-md-2">@participation.participant.name</div>		
 			   	<div class="col-md-2">@participation.battleTag</div>
-			   	<div class="col-md-2">@participation.deck1.heroClass.name, @participation.deck2.heroClass.name, @participation.deck3.heroClass.name</div>
+			   	<div class="col-md-2">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck1.heroClass.name + ".png")">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck2.heroClass.name + ".png")">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck3.heroClass.name + ".png")">
+			   	</div>
 		    </div>
 		}
 	}

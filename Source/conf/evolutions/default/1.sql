@@ -51,6 +51,8 @@ create table tournament (
   mode_name                 varchar(255),
   best_of                   integer,
   rules                     varchar(32768),
+  status                    varchar(8),
+  constraint ck_tournament_status check (status in ('SIGNUP','RUNNING','FINISHED')),
   constraint pk_tournament primary key (id))
 ;
 

@@ -2,8 +2,13 @@ package org.slashgames.tournament.tournaments.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.avaje.ebean.annotation.EnumMapping;
+import com.avaje.ebean.annotation.EnumValue;
 
 import play.db.ebean.Model;
 
@@ -33,4 +38,7 @@ public class Tournament extends Model {
 
 	@Column(length = 32768)
 	public String rules;
+	
+	@Enumerated(EnumType.STRING)
+	public TournamentStatus status = TournamentStatus.SIGNUP;
 }

@@ -5,5 +5,10 @@
    	<div class="col-md-2"><strong>Spiel</strong></div>
    	<div class="col-md-2"><strong>Datum</strong></div>
    	<div class="col-md-2"><strong>Ort</strong></div>
-   	<div class="col-md-2"><strong>Details</strong></div>			
+   	<div class="col-md-2"><strong>Details</strong></div>
+   	
+   	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+		<div class="col-md-2"><strong>Administration</strong></div>
+	}
+
 </div>

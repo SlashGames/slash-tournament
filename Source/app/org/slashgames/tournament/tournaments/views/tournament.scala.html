@@ -49,6 +49,10 @@
 	   	<div class="col-md-2"><strong>Name</strong></div>
 	   	<div class="col-md-2"><strong>BattleTag</strong></div>
 	   	<div class="col-md-2"><strong>Klassen</strong></div>
+	   	
+	  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+			<div class="col-md-2"><strong>Administration</strong></div>
+		}
     </div>
     	
 	@if(tournament.game.name.equals("Hearthstone")) {
@@ -61,6 +65,10 @@
 			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck2.heroClass.name + ".png")">
 			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck3.heroClass.name + ".png")">
 			   	</div>
+			   	
+			  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+					<div class="col-md-2"><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.confirmRemoveParticipant(participation.id)">entfernen</a></div>
+				}
 		    </div>
 		}
 	}

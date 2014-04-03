@@ -27,6 +27,10 @@ public class HearthstoneParticipationModelController {
 				.eq("participation.tournament", tournament).findUnique();
 	}
 
+	public static HearthstoneParticipation getParticipation(Long participationId) {
+		return find.byId(participationId);
+	}
+
 	public static boolean isParticipating(User user, Tournament tournament) {
 		return getParticipation(user, tournament) != null;
 	}
@@ -74,5 +78,13 @@ public class HearthstoneParticipationModelController {
 
 		hearthstoneParticipation.participation.save();
 		hearthstoneParticipation.save();
+	}
+
+	public static void removeParticipation(Long participationId) {
+		HearthstoneParticipation hearthstoneParticipation = getParticipation(participationId);
+		Participation participation = hearthstoneParticipation.participation;
+		
+		hearthstoneParticipation.delete();
+		participation.delete();
 	}
 }

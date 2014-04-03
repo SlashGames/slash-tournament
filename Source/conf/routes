@@ -26,5 +26,9 @@ POST	/cms/tournament/add			org.slashgames.tournament.cms.controllers.TournamentC
 GET		/cms/tournament/edit/:id	org.slashgames.tournament.cms.controllers.TournamentCMSController.editTournament(id: Long)
 POST	/cms/tournament/edit/:id	org.slashgames.tournament.cms.controllers.TournamentCMSController.editTournamentSubmit(id: Long)
 
+GET     /cms/hearthstone/participant/confirmRemove/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.confirmRemoveParticipant(id: Long)
+GET	    /cms/hearthstone/participant/remove/:id			org.slashgames.tournament.hearthstone.controllers.HearthstoneController.removeParticipant(id: Long)
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

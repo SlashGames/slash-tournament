@@ -7,6 +7,7 @@ import java.util.List;
 import org.slashgames.tournament.auth.controllers.LoginController;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.auth.security.Secured;
+import org.slashgames.tournament.auth.security.SecuredAdmin;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneClassModelController;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
@@ -68,6 +69,25 @@ public class HearthstoneController extends Controller {
 		}
 	}
 
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result confirmRemoveParticipant(Long participationId) {
+		HearthstoneParticipation hearthstoneParticipation = HearthstoneParticipationModelController
+				.getParticipation(participationId);
+		return ok(org.slashgames.tournament.cms.views.html.confirmRemoveHearthstoneParticipant.render(hearthstoneParticipation));
+	}
+
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result removeParticipant(Long participationId) {
+		HearthstoneParticipation hearthstoneParticipation = HearthstoneParticipationModelController.getParticipation(participationId);
+		Long tournamentId = hearthstoneParticipation.participation.tournament.id;
+		
+		// Remove participant.
+		HearthstoneParticipationModelController.removeParticipation(participationId);
+		
+		// Redirect to tournament page.
+		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournamentId));
+	}
+	
 	public static boolean isParticipating(Tournament tournament) {
 		User currentUser = LoginController.getCurrentUser();
 		return HearthstoneParticipationModelController.isParticipating(

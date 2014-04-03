@@ -1,0 +1,15 @@
+@(hearthstoneParticipation: org.slashgames.tournament.hearthstone.models.HearthstoneParticipation)
+
+@import org.slashgames.tournament.core.views.html._
+
+@main("Teilnehmer entfernen") {
+	<p>Teilnehmer entfernen?</p>
+	
+	<ul><strong>Turnier:</strong> @hearthstoneParticipation.participation.tournament.name</ul>
+	<ul><strong>Teilnehmer:</strong> @hearthstoneParticipation.participation.participant.name</ul>
+	
+	<p>
+		<a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.removeParticipant(hearthstoneParticipation.id)">ja</a>
+		<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(hearthstoneParticipation.participation.tournament.id)">nein</a>
+	</p>
+}

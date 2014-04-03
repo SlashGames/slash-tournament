@@ -8,6 +8,7 @@ import org.slashgames.tournament.hearthstone.models.HearthstoneDeck;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
+import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
 import play.db.ebean.Model;
 
@@ -37,6 +38,11 @@ public class HearthstoneParticipationModelController {
 				tournament);
 
 		if (hearthstoneParticipation == null) {
+			// Don't allow to participate when signup is closed.
+			if (tournament.status != TournamentStatus.SIGNUP) {
+				return;
+			}
+			
 			hearthstoneParticipation = new HearthstoneParticipation();
 			hearthstoneParticipation.participation = new Participation();
 		}

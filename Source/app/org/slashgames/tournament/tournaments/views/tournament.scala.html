@@ -1,6 +1,7 @@
 @(tournament: org.slashgames.tournament.tournaments.models.Tournament)
 
 @import org.slashgames.tournament.core.views.html.main
+@import org.slashgames.tournament.tournaments.models._
 
 @main(tournament.name) {
 	<h3>Informationen</h3>
@@ -15,10 +16,14 @@
 				@if(org.slashgames.tournament.hearthstone.controllers.HearthstoneController.isParticipating(tournament)) {
 					<p>Du nimmst an diesem Turnier teil.</p>
 					<p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participate(tournament.id)">Teilnahmedaten &auml;ndern</a></p>
-				} else {
+				} else { @if(tournament.status == TournamentStatus.SIGNUP) {
 					<p>Du nimmst an diesem Turnier noch nicht teil.</p>
 					<p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participate(tournament.id)">An diesem Turnier teilnehmen</a></p>
-				}
+				} else { @if(tournament.status == TournamentStatus.RUNNING) {
+					<p>Dieses Turnier l&auml;uft bereits.</p>
+				} else { @if(tournament.status == TournamentStatus.FINISHED) {
+					<p>Dieses Turnier ist bereits beendet.</p>
+				}}}}
 			}
 		} else {
 			Du musst eingeloggt sein, um an diesem Turnier teilnehmen zu k&ouml;nnen.

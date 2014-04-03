@@ -1,15 +1,40 @@
 @(tournaments: List[org.slashgames.tournament.tournaments.models.Tournament])
 
 @import org.slashgames.tournament.core.views.html.main
+@import org.slashgames.tournament.tournaments.models._
 
 @main("Turniere") {
-	@tournamentListHeader()
-	    
-	@for(tournament <- tournaments) {
-		@tournamentListEntry(tournament)
-	}
-	
 	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
 		<p><a href="@org.slashgames.tournament.cms.controllers.routes.TournamentCMSController.addTournament()">Turnier hinzuf&uuml;gen</a></p>
 	}
+
+	<h3>Laufende Turniere</h3>
+	
+	@tournamentListHeader()
+		
+	@for(tournament <- tournaments) {
+		@if(tournament.status == TournamentStatus.RUNNING) {
+			@tournamentListEntry(tournament)
+		}
+	}
+
+	<h3>Anstehende Turniere</h3>
+	
+	@tournamentListHeader()
+		
+	@for(tournament <- tournaments) {
+		@if(tournament.status == TournamentStatus.SIGNUP) {
+			@tournamentListEntry(tournament)
+		}
+	}
+	
+	<h3>Abgeschlossene Turniere</h3>
+	
+	@tournamentListHeader()
+		
+	@for(tournament <- tournaments) {
+		@if(tournament.status == TournamentStatus.FINISHED) {
+			@tournamentListEntry(tournament)
+		}
+	}	
 }

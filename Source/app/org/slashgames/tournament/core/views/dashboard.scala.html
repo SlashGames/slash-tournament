@@ -1,13 +1,36 @@
 @(participations: List[org.slashgames.tournament.tournaments.models.Participation])
 
+@import org.slashgames.tournament.tournaments.models._
 @import org.slashgames.tournament.tournaments.views.html._
 
 @main("Dashboard") {
-	<h3>Meine Turniere</h3>
+	<h3>Aktuelles Turnier</h3>
+
+	@for(participation <- participations) {
+		@if(participation.tournament.status == TournamentStatus.RUNNING) {
+			<ul>
+				@tournamentDetails(participation.tournament)
+			</ul>
+		}
+	}
+
+	<h3>Meine anstehenden Turniere</h3>
 	
 	@tournamentListHeader()
 		
 	@for(participation <- participations) {
-		@tournamentListEntry(participation.tournament)
+		@if(participation.tournament.status == TournamentStatus.SIGNUP) {
+			@tournamentListEntry(participation.tournament)
+		}
 	}
+	
+	<h3>Meine abgeschlossenen Turniere</h3>
+	
+	@tournamentListHeader()
+		
+	@for(participation <- participations) {
+		@if(participation.tournament.status == TournamentStatus.FINISHED) {
+			@tournamentListEntry(participation.tournament)
+		}
+	}	
 }

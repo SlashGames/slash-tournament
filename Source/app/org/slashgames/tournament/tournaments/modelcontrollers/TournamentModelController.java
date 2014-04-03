@@ -1,9 +1,11 @@
 package org.slashgames.tournament.tournaments.modelcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.tournaments.models.Tournament;
+import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
 import play.db.ebean.Model;
 
@@ -24,6 +26,14 @@ public class TournamentModelController {
 		updateTournament(tournament, data);
 	}
 
+	public static List<String> getTournamentStatusStrings() {
+		List<String> states = new ArrayList<String>();
+		for (TournamentStatus status : TournamentStatus.values()) {
+			states.add(status.name());
+		}
+		return states;
+	}
+	
 	public static void updateTournament(Tournament tournament,
 			TournamentData data) {
 		tournament.name = data.name;
@@ -36,6 +46,7 @@ public class TournamentModelController {
 				.findByName(data.format);
 		tournament.mode = TournamentModeModelController.findByName(data.mode);
 		tournament.rules = data.rules;
+		tournament.status = TournamentStatus.valueOf(data.status);
 		tournament.save();
 	}
 }

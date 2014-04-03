@@ -22,6 +22,8 @@ public class TournamentData {
 
 	public String rules;
 
+	public String status;
+	
 	public String validate() {
 		if (StringHelper.isNullOrEmpty(name)) {
 			return "Bitte Turniernamen angeben!";
@@ -78,5 +80,6 @@ public class TournamentData {
 		this.format = tournament.format.name;
 		this.mode = tournament.mode.name;
 		this.rules = tournament.rules;
+		this.status = tournament.status.name();
 	}
 }

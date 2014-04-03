@@ -8,9 +8,9 @@
 
 	@for(participation <- participations) {
 		@if(participation.tournament.status == TournamentStatus.RUNNING) {
-			<ul>
-				@tournamentDetails(participation.tournament)
-			</ul>
+			<h4><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(participation.tournament.id)">@participation.tournament.name</a></h4>
+			
+			@tournamentDetails(participation.tournament)
 		}
 	}
 

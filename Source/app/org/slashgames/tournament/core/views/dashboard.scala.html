@@ -1,0 +1,13 @@
+@(participations: List[org.slashgames.tournament.tournaments.models.Participation])
+
+@import org.slashgames.tournament.tournaments.views.html._
+
+@main("Dashboard") {
+	<h3>Meine Turniere</h3>
+	
+	@tournamentListHeader()
+		
+	@for(participation <- participations) {
+		@tournamentListEntry(participation.tournament)
+	}
+}

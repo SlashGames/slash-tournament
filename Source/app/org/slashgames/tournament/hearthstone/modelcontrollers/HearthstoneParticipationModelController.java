@@ -6,6 +6,7 @@ import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.models.HearthstoneDeck;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
+import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.db.ebean.Model;
@@ -16,13 +17,13 @@ public class HearthstoneParticipationModelController {
 
 	public static List<HearthstoneParticipation> getParticipations(
 			Tournament tournament) {
-		return find.where().eq("tournament", tournament).findList();
+		return find.fetch("participation").where().eq("participation.tournament", tournament).findList();
 	}
 
 	public static HearthstoneParticipation getParticipation(User user,
 			Tournament tournament) {
-		return find.where().eq("participant", user)
-				.eq("tournament", tournament).findUnique();
+		return find.fetch("participation").where().eq("participation.participant", user)
+				.eq("participation.tournament", tournament).findUnique();
 	}
 
 	public static boolean isParticipating(User user, Tournament tournament) {
@@ -32,38 +33,40 @@ public class HearthstoneParticipationModelController {
 	public static void addOrUpdateParticipation(User participant,
 			Tournament tournament, HearthstoneParticipationData data) {
 
-		HearthstoneParticipation participation = getParticipation(participant,
+		HearthstoneParticipation hearthstoneParticipation = getParticipation(participant,
 				tournament);
 
-		if (participation == null) {
-			participation = new HearthstoneParticipation();
+		if (hearthstoneParticipation == null) {
+			hearthstoneParticipation = new HearthstoneParticipation();
+			hearthstoneParticipation.participation = new Participation();
 		}
 
-		participation.participant = participant;
-		participation.tournament = tournament;
+		hearthstoneParticipation.participation.participant = participant;
+		hearthstoneParticipation.participation.tournament = tournament;
 
-		participation.battleTag = data.battleTag;
+		hearthstoneParticipation.battleTag = data.battleTag;
 
-		participation.deck1 = new HearthstoneDeck();
-		participation.deck1.deckLink = data.deck1Link;
-		participation.deck1.heroClass = HearthstoneClassModelController
+		hearthstoneParticipation.deck1 = new HearthstoneDeck();
+		hearthstoneParticipation.deck1.deckLink = data.deck1Link;
+		hearthstoneParticipation.deck1.heroClass = HearthstoneClassModelController
 				.findByName(data.deck1Class);
-		participation.deck1.save();
+		hearthstoneParticipation.deck1.save();
 
-		participation.deck2 = new HearthstoneDeck();
-		participation.deck2.deckLink = data.deck2Link;
-		participation.deck2.heroClass = HearthstoneClassModelController
+		hearthstoneParticipation.deck2 = new HearthstoneDeck();
+		hearthstoneParticipation.deck2.deckLink = data.deck2Link;
+		hearthstoneParticipation.deck2.heroClass = HearthstoneClassModelController
 				.findByName(data.deck2Class);
-		participation.deck2.save();
+		hearthstoneParticipation.deck2.save();
 
-		participation.deck3 = new HearthstoneDeck();
-		participation.deck3.deckLink = data.deck3Link;
-		participation.deck3.heroClass = HearthstoneClassModelController
+		hearthstoneParticipation.deck3 = new HearthstoneDeck();
+		hearthstoneParticipation.deck3.deckLink = data.deck3Link;
+		hearthstoneParticipation.deck3.heroClass = HearthstoneClassModelController
 				.findByName(data.deck3Class);
-		participation.deck3.save();
+		hearthstoneParticipation.deck3.save();
 
-		participation.seedRank = Integer.parseInt(data.seedRank);
+		hearthstoneParticipation.seedRank = Integer.parseInt(data.seedRank);
 
-		participation.save();
+		hearthstoneParticipation.participation.save();
+		hearthstoneParticipation.save();
 	}
 }

@@ -3,28 +3,10 @@
 @import org.slashgames.tournament.core.views.html.main
 
 @main("Turniere") {
-	<div class="row">
-	   	<div class="col-md-2"><strong>Turnier</strong></div>
-	   	<div class="col-md-2"><strong>Spiel</strong></div>
-	   	<div class="col-md-2"><strong>Datum</strong></div>
-	   	<div class="col-md-2"><strong>Ort</strong></div>
-	   	<div class="col-md-2"><strong>Details</strong></div>			
-    </div>
+	@tournamentListHeader()
 	    
 	@for(tournament <- tournaments) {
-		<div class="row">
-		   	<div class="col-md-2">@tournament.name</div>
-		   	<div class="col-md-2">@gameName(tournament.game)</div>
-		   	<div class="col-md-2">@tournament.date</div>
-		   	<div class="col-md-2">@tournament.location</div>
-		   	<div class="col-md-2">
-		   		<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournament.id)">Details</a>
-		   		
-		   		@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
-		   			<a href="@org.slashgames.tournament.cms.controllers.routes.TournamentCMSController.editTournament(tournament.id)">bearbeiten</a>
-		   		}
-		   	</div>			
-	    </div>
+		@tournamentListEntry(tournament)
 	}
 	
 	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {

@@ -55,7 +55,7 @@
 	@if(tournament.game.name.equals("Hearthstone")) {
 		@for(participation <- org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController.getParticipations(tournament)) {
 			<div class="row">
-			   	<div class="col-md-2">@participation.participant.name</div>		
+			   	<div class="col-md-2">@participation.participation.participant.name</div>		
 			   	<div class="col-md-2">@participation.battleTag</div>
 			   	<div class="col-md-2">
 			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck1.heroClass.name + ".png")">

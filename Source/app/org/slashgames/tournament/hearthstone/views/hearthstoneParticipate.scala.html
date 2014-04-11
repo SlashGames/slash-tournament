@@ -1,10 +1,15 @@
-@(tournamentId: Long, participateForm: Form[org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData], classes: List[String])
+@(theTournament: org.slashgames.tournament.tournaments.models.Tournament, participateForm: Form[org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData], classes: List[String])
 
 @import org.slashgames.tournament.core.views.html._
 @import org.slashgames.tournament.core.views.html.forms._
+@import org.slashgames.tournament.tournaments.views.html._
 
 @main("An Turnier teilnehmen") {
-	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participateSubmit(tournamentId)){
+	<h4>@theTournament.name</h4>
+			
+	@tournamentDetails(theTournament)
+
+	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participateSubmit(theTournament.id)){
 		@formError(participateForm)
 		
 		@formInput(participateForm, "text", "battleTag", "BattleTag", "Dein Battle.net Nickname mit numerischem BattleTag-Code (z.B. ArdoR#2629)")

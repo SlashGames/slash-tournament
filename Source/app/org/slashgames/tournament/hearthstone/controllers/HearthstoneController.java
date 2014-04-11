@@ -41,31 +41,31 @@ public class HearthstoneController extends Controller {
 		}
 
 		return ok(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipate
-				.render(tournamentId, form, classes));
+				.render(tournament, form, classes));
 	}
 
 	@Security.Authenticated(Secured.class)
 	public static Result participateSubmit(Long tournamentId) {
 		Form<HearthstoneParticipationData> participationForm = form(
 				HearthstoneParticipationData.class).bindFromRequest();
-
+		Tournament tournament = TournamentModelController
+				.findById(tournamentId);
+		
 		// Check for errors.
 		if (participationForm.hasErrors()) {
 			List<String> classes = HearthstoneClassModelController
 					.getClassNames();
 			return badRequest(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipate
-					.render(tournamentId, participationForm, classes));
+					.render(tournament, participationForm, classes));
 		} else {
 			// Get form data.
 			HearthstoneParticipationData data = participationForm.get();
 			User participant = LoginController.getCurrentUser();
-			Tournament tournament = TournamentModelController
-					.findById(tournamentId);
 
 			HearthstoneParticipationModelController.addOrUpdateParticipation(
 					participant, tournament, data);
 			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
-					.tournament(tournamentId));
+					.tournament(tournament.id));
 		}
 	}
 

@@ -1,0 +1,6 @@
+@(header: String, content: String, urlLabel: String, url: Call)
+
+@main(header) {
+	<p>@content</p>
+	<p><a href="@url" title="@urlLabel">@urlLabel</a></p>
+}

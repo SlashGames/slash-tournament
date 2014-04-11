@@ -8,6 +8,10 @@
 	
 	@tournamentDetails(tournament)
 	
+  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+		<p><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.startNextRound(tournament.id)">neue Runde beginnen</a></p>
+	}
+				
 	<h3>Teilnahme</h3>
 	
 	<div>

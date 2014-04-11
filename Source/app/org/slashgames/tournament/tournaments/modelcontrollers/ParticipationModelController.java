@@ -13,6 +13,10 @@ public class ParticipationModelController {
 	private static Model.Finder<Long, Participation> find = new Model.Finder<Long, Participation>(
 			Long.class, Participation.class);
 
+	public static List<Participation> getParticipations(Tournament tournament) {
+		return find.where().eq("tournament", tournament).findList();
+	}
+	
 	public static List<Participation> getParticipations(User user) {
 		return find.where().eq("participant", user).findList();
 	}

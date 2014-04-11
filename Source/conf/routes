@@ -8,6 +8,7 @@ GET     /                           org.slashgames.tournament.core.controllers.A
 # Tournaments
 GET     /tournament/all             org.slashgames.tournament.tournaments.controllers.TournamentController.tournaments()
 GET     /tournament/:id             org.slashgames.tournament.tournaments.controllers.TournamentController.tournament(id: Long)
+GET    /tournament/nextRound/:id   	org.slashgames.tournament.tournaments.controllers.TournamentController.startNextRound(id: Long)
 
 # Authentication
 GET     /auth/login               		org.slashgames.tournament.auth.controllers.LoginController.login()

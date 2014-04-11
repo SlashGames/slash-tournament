@@ -3,7 +3,10 @@ package org.slashgames.tournament.tournaments.modelcontrollers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.cms.formdata.TournamentData;
+import org.slashgames.tournament.tournaments.models.Match;
+import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
@@ -48,5 +51,30 @@ public class TournamentModelController {
 		tournament.rules = data.rules;
 		tournament.status = TournamentStatus.valueOf(data.status);
 		tournament.save();
+	}
+	
+	public static void generateMatches(Tournament tournament) {
+		// Check for results.
+		List<Match> matches = MatchModelController.getMatches(tournament, tournament.currentRound);
+		
+		for (Match match : matches) {
+			if (match.player1Wins.equals(0) && match.player2Wins.equals(0)) {
+				throw new IllegalStateException(String.format("Match %d has no result.", match.id));
+			}
+		}
+		
+		// Begin next round.
+		tournament.currentRound++;
+		tournament.save();
+		
+		// Generate matches.
+		List<Participation> participations = ParticipationModelController.getParticipations(tournament);
+		
+		for (int i = 0; i < participations.size() - 1; i++) {
+			User player1 = participations.get(i).participant;
+			User player2 = participations.get(i + 1).participant;
+			
+			MatchModelController.addMatch(tournament, tournament.currentRound, player1, player2);
+		}
 	}
 }

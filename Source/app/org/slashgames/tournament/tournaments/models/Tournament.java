@@ -41,4 +41,6 @@ public class Tournament extends Model {
 	
 	@Enumerated(EnumType.STRING)
 	public TournamentStatus status = TournamentStatus.SIGNUP;
+	
+	public Integer currentRound = 0;
 }

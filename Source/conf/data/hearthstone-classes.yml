@@ -1,6 +1,20 @@
 classes:
 
   - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
-    name: Warrior
+    name: Druid
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Hunter
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Mage
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Paladin
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Priest
   - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
     name: Rogue
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Shaman
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Warlock
+  - !!org.slashgames.tournament.hearthstone.models.HearthstoneClass
+    name: Warrior

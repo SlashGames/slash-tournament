@@ -7,9 +7,9 @@
 	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participateSubmit(tournamentId)){
 		@formError(participateForm)
 		
-		@formInput(participateForm, "text", "battleTag", "BattleTag")
+		@formInput(participateForm, "text", "battleTag", "BattleTag", "Dein Battle.net Nickname mit numerischem BattleTag-Code (z.B. ArdoR#2629)")
 		
-	  	@formInput(participateForm, "text", "deck1Link", "Erste Deckliste")
+	  	@formInput(participateForm, "text", "deck1Link", "Erste Deckliste", "Link zur Liste der Karten des ersten Decks, mit dem Du teilnehmen wirst (z.B. http://www.hearthhead.com/deck=20405/nicks-kirin-tor-mage)")
 	  	@formSelect(participateForm, "deck1Class", "Erste Deckklasse", classes)
 	  	
 	  	@formInput(participateForm, "text", "deck2Link", "Zweite Deckliste")
@@ -18,7 +18,7 @@
 	  	@formInput(participateForm, "text", "deck3Link", "Dritte Deckliste")
 	  	@formSelect(participateForm, "deck3Class", "Dritte Deckklasse", classes)
 	  	
-	  	@formInput(participateForm, "text", "seedRank", "Aktueller Battle.Net-Rang")
+	  	@formInput(participateForm, "text", "seedRank", "Aktueller Battle.Net-Rang", "Dein aktueller Rang im Battle.net. Falls Du keine Ranglistenspiele spielst, trage 25 ein. Falls du bereits zur Legende aufgestiegen bist, trage 1 ein.")
 	  			
 	 	@formButton("Teilnehmen")
 	}

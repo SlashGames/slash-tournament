@@ -1,6 +1,10 @@
-@(form: Form[_], inputType: String, field: String, label: String)
+@(form: Form[_], inputType: String, field: String, label: String, help: String = "")
 
 <div class="form-group">
    	<label for="input-@field">@label</label>
    	<input type="@inputType" name="@field" class="form-control" id="input-@field" placeholder="@label" value="@form.field(field).value">
+   	
+   	@if(help != "") {
+	   	<span class="help-block">@help</span>
+   	}
 </div>

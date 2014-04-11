@@ -2,12 +2,14 @@ package org.slashgames.tournament.auth.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "tournament_user")
 public class User extends Model {
 	/**
 	 * Generated serial version ID.

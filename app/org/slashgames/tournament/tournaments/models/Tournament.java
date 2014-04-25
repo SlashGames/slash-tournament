@@ -36,7 +36,7 @@ public class Tournament extends Model {
 
 	public Integer bestOf;
 
-	@Column(length = 32768)
+	@Column(length = 10000)
 	public String rules;
 	
 	@Enumerated(EnumType.STRING)

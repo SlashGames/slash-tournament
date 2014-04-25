@@ -9,7 +9,7 @@ import org.slashgames.tournament.auth.models.User;
 import play.db.ebean.Model;
 
 @Entity
-public class Match extends Model {
+public class TournamentMatch extends Model {
 	@Id
 	public Long id;
 

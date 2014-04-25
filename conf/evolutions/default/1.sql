@@ -2,7 +2,7 @@
 
 create table game (
   name                      varchar(255) not null,
-  rules                     varchar(32768),
+  rules                     varchar(10000),
   icon                      varchar(255),
   constraint pk_game primary key (name))
 ;
@@ -30,17 +30,6 @@ create table hearthstone_participation (
   constraint pk_hearthstone_participation primary key (id))
 ;
 
-create table match (
-  id                        bigint auto_increment not null,
-  round                     integer,
-  tournament_id             bigint,
-  player1_email             varchar(255),
-  player2_email             varchar(255),
-  player1wins               integer,
-  player2wins               integer,
-  constraint pk_match primary key (id))
-;
-
 create table participation (
   id                        bigint auto_increment not null,
   tournament_id             bigint,
@@ -58,7 +47,7 @@ create table tournament (
   format_name               varchar(255),
   mode_name                 varchar(255),
   best_of                   integer,
-  rules                     varchar(32768),
+  rules                     varchar(10000),
   status                    varchar(8),
   current_round             integer,
   constraint ck_tournament_status check (status in ('SIGNUP','RUNNING','FINISHED')),
@@ -67,8 +56,19 @@ create table tournament (
 
 create table tournament_format (
   name                      varchar(255) not null,
-  rules                     varchar(32768),
+  rules                     varchar(10000),
   constraint pk_tournament_format primary key (name))
+;
+
+create table tournament_match (
+  id                        bigint auto_increment not null,
+  round                     integer,
+  tournament_id             bigint,
+  player1_email             varchar(255),
+  player2_email             varchar(255),
+  player1wins               integer,
+  player2wins               integer,
+  constraint pk_tournament_match primary key (id))
 ;
 
 create table tournament_mode (
@@ -94,22 +94,22 @@ alter table hearthstone_participation add constraint fk_hearthstone_participatio
 create index ix_hearthstone_participation_deck2_4 on hearthstone_participation (deck2_id);
 alter table hearthstone_participation add constraint fk_hearthstone_participation_deck3_5 foreign key (deck3_id) references hearthstone_deck (id) on delete restrict on update restrict;
 create index ix_hearthstone_participation_deck3_5 on hearthstone_participation (deck3_id);
-alter table match add constraint fk_match_tournament_6 foreign key (tournament_id) references tournament (id) on delete restrict on update restrict;
-create index ix_match_tournament_6 on match (tournament_id);
-alter table match add constraint fk_match_player1_7 foreign key (player1_email) references tournament_user (email) on delete restrict on update restrict;
-create index ix_match_player1_7 on match (player1_email);
-alter table match add constraint fk_match_player2_8 foreign key (player2_email) references tournament_user (email) on delete restrict on update restrict;
-create index ix_match_player2_8 on match (player2_email);
-alter table participation add constraint fk_participation_tournament_9 foreign key (tournament_id) references tournament (id) on delete restrict on update restrict;
-create index ix_participation_tournament_9 on participation (tournament_id);
-alter table participation add constraint fk_participation_participant_10 foreign key (participant_email) references tournament_user (email) on delete restrict on update restrict;
-create index ix_participation_participant_10 on participation (participant_email);
-alter table tournament add constraint fk_tournament_game_11 foreign key (game_name) references game (name) on delete restrict on update restrict;
-create index ix_tournament_game_11 on tournament (game_name);
-alter table tournament add constraint fk_tournament_format_12 foreign key (format_name) references tournament_format (name) on delete restrict on update restrict;
-create index ix_tournament_format_12 on tournament (format_name);
-alter table tournament add constraint fk_tournament_mode_13 foreign key (mode_name) references tournament_mode (name) on delete restrict on update restrict;
-create index ix_tournament_mode_13 on tournament (mode_name);
+alter table participation add constraint fk_participation_tournament_6 foreign key (tournament_id) references tournament (id) on delete restrict on update restrict;
+create index ix_participation_tournament_6 on participation (tournament_id);
+alter table participation add constraint fk_participation_participant_7 foreign key (participant_email) references tournament_user (email) on delete restrict on update restrict;
+create index ix_participation_participant_7 on participation (participant_email);
+alter table tournament add constraint fk_tournament_game_8 foreign key (game_name) references game (name) on delete restrict on update restrict;
+create index ix_tournament_game_8 on tournament (game_name);
+alter table tournament add constraint fk_tournament_format_9 foreign key (format_name) references tournament_format (name) on delete restrict on update restrict;
+create index ix_tournament_format_9 on tournament (format_name);
+alter table tournament add constraint fk_tournament_mode_10 foreign key (mode_name) references tournament_mode (name) on delete restrict on update restrict;
+create index ix_tournament_mode_10 on tournament (mode_name);
+alter table tournament_match add constraint fk_tournament_match_tournament_11 foreign key (tournament_id) references tournament (id) on delete restrict on update restrict;
+create index ix_tournament_match_tournament_11 on tournament_match (tournament_id);
+alter table tournament_match add constraint fk_tournament_match_player1_12 foreign key (player1_email) references tournament_user (email) on delete restrict on update restrict;
+create index ix_tournament_match_player1_12 on tournament_match (player1_email);
+alter table tournament_match add constraint fk_tournament_match_player2_13 foreign key (player2_email) references tournament_user (email) on delete restrict on update restrict;
+create index ix_tournament_match_player2_13 on tournament_match (player2_email);
 
 
 
@@ -125,13 +125,13 @@ drop table hearthstone_deck;
 
 drop table hearthstone_participation;
 
-drop table match;
-
 drop table participation;
 
 drop table tournament;
 
 drop table tournament_format;
+
+drop table tournament_match;
 
 drop table tournament_mode;
 

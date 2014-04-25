@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.cms.formdata.TournamentData;
-import org.slashgames.tournament.tournaments.models.Match;
+import org.slashgames.tournament.tournaments.models.TournamentMatch;
 import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentStatus;
@@ -55,9 +55,9 @@ public class TournamentModelController {
 	
 	public static void generateMatches(Tournament tournament) {
 		// Check for results.
-		List<Match> matches = MatchModelController.getMatches(tournament, tournament.currentRound);
+		List<TournamentMatch> matches = MatchModelController.getMatches(tournament, tournament.currentRound);
 		
-		for (Match match : matches) {
+		for (TournamentMatch match : matches) {
 			if (match.player1Wins.equals(0) && match.player2Wins.equals(0)) {
 				throw new IllegalStateException(String.format("Match %d has no result.", match.id));
 			}

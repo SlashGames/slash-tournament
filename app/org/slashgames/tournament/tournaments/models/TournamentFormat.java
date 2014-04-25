@@ -15,6 +15,6 @@ public class TournamentFormat extends Model {
 	@Formats.NonEmpty
 	public String name;
 
-	@Column(length = 32768)
+	@Column(length = 10000)
 	public String rules;
 }

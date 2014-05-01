@@ -14,9 +14,14 @@ public class Game extends Model {
 	@Constraints.Required
 	@Formats.NonEmpty
 	public String name;
-
+	
+	/**
+     * @deprecated
+     * 		Specify game rules by adding GameRules objects instead.
+     */
+	@Deprecated
 	@Column(length = 10000)
 	public String rules;
-
+	
 	public String icon;
 }

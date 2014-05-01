@@ -4,12 +4,18 @@
 @import org.slashgames.tournament.core.views.html.forms._
 
 @main("Login") {
-	@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.loginSubmit){
-		@formError(loginForm)
-		
-		@formInput(loginForm, "email", "email", "E-mail")
-		@formInput(loginForm, "password", "password", "Password")
-	  	
-	 	@formButton("Login")
-	}
+	<p>
+		@helper.form(org.slashgames.tournament.auth.controllers.routes.LoginController.loginSubmit){
+			@formError(loginForm)
+			
+			@formInput(loginForm, "email", "email", "E-mail")
+			@formInput(loginForm, "password", "password", "Password")
+		  	
+		 	@formButton("Login")
+		}
+	</p>
+	
+	<p>
+		<a href="@org.slashgames.tournament.auth.controllers.routes.LoginController.signup()">Noch nicht registiert?</a>
+	</p>
 }

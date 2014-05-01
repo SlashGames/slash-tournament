@@ -1,0 +1,11 @@
+/* HTML5 backwards compatibility for older IEs. */
+header, section, footer, aside, nav, main, article, figure
+{
+	position: relative; /* enables absolute position for children */
+	display: block;
+}
+
+div.footer
+{
+	padding-top: 2em;
+}

@@ -29,6 +29,9 @@ public class Tournament extends Model {
 	public Game game;
 
 	@ManyToOne
+	public GameRules gameRules;
+	
+	@ManyToOne
 	public TournamentFormat format;
 
 	@ManyToOne

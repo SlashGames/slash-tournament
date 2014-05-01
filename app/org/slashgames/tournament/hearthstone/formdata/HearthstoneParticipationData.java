@@ -42,6 +42,11 @@ public class HearthstoneParticipationData {
 			return "Bitte aktuellen Battle.Net-Rang (1-25) angeben!";
 		}
 
+		// Classes must not be picked more than one.
+		if (deck1Class.equals(deck2Class) || deck1Class.equals(deck3Class) || deck2Class.equals(deck3Class)) {
+			return "Keine Klasse darf doppelt gewählt werden.";
+		}
+		
 		return null;
 	}
 

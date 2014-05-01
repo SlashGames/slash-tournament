@@ -12,6 +12,8 @@ public class TournamentData {
 
 	public String judge;
 
+	public Long gameRules;
+	
 	public String game;
 
 	public String format;
@@ -73,6 +75,7 @@ public class TournamentData {
 	public void fill(Tournament tournament) {
 		this.date = tournament.date;
 		this.game = tournament.game.name;
+		this.gameRules = tournament.gameRules.id;
 		this.judge = tournament.judge;
 		this.location = tournament.location;
 		this.name = tournament.name;

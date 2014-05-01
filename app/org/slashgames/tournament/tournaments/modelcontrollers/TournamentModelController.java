@@ -44,6 +44,7 @@ public class TournamentModelController {
 		tournament.location = data.location;
 		tournament.judge = data.judge;
 		tournament.game = GameModelController.findByName(data.game);
+		tournament.gameRules = GameRulesModelController.findById(data.gameRules);
 		tournament.bestOf = Integer.parseInt(data.bestOf);
 		tournament.format = TournamentFormatModelController
 				.findByName(data.format);

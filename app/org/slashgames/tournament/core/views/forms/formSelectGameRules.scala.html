@@ -1,0 +1,10 @@
+@(form: Form[_], field: String, label: String, rules: List[org.slashgames.tournament.tournaments.models.GameRules])
+
+<div class="form-group">
+	<label for="select-@field">@label</label>
+       <select name="@field" class="form-control" id="select-@field">
+        @for(rule <- rules) {
+	    	<option value="@rule.id" @if(rule.id.toString.equals(form.field(field).value)) { selected }>@rule.game.name (Revision @rule.revision)</option>
+		}
+    </select>	
+</div>

@@ -65,9 +65,9 @@
 			   	<div class="col-md-2">@participation.participation.participant.name</div>		
 			   	<div class="col-md-2">@participation.battleTag</div>
 			   	<div class="col-md-2">
-			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck1.heroClass.name + ".png")">
-			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck2.heroClass.name + ".png")">
-			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck3.heroClass.name + ".png")">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck1.heroClass.name + ".png")" alt="@participation.deck1.heroClass.name" title="@participation.deck1.heroClass.name">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck2.heroClass.name + ".png")" alt="@participation.deck2.heroClass.name" title="@participation.deck2.heroClass.name">
+			   		<img width="24" src="@routes.Assets.at("images/hearthstoneicons/" + participation.deck3.heroClass.name + ".png")" alt="@participation.deck3.heroClass.name" title="@participation.deck3.heroClass.name">
 			   	</div>
 			   	
 			  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {

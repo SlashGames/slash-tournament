@@ -1,0 +1,10 @@
+@(form: Form[_], field: String, label: String, users: List[org.slashgames.tournament.auth.models.User])
+
+<div class="form-group">
+	<label for="select-@field">@label</label>
+       <select name="@field" class="form-control" id="select-@field">
+        @for(user <- users) {
+	    	<option value="@user.email" @if(user.email.equals(form.field(field).value)) { selected }>@user.name</option>
+		}
+    </select>	
+</div>

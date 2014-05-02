@@ -1,0 +1,12 @@
+@(form: Form[_], field: String, label: String, participations: List[org.slashgames.tournament.tournaments.models.Participation])
+
+<div class="form-group">
+	<label for="select-@field">@label</label>
+       <select name="@field" class="form-control" id="select-@field">
+       <option value="">BYE</option>
+       
+        @for(participation <- participations) {
+	    	<option value="@participation.participant.email" @if(participation.participant.email.equals(form.field(field).value)) { selected }>@participation.participant.name</option>
+		}
+    </select>	
+</div>

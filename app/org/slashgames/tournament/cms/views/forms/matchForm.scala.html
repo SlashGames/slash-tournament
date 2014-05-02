@@ -1,0 +1,17 @@
+@(theForm: Form[org.slashgames.tournament.cms.formdata.MatchData], participations: List[org.slashgames.tournament.tournaments.models.Participation], call: play.api.mvc.Call, buttonCaption: String)
+
+@import org.slashgames.tournament.core.views.html.forms._
+
+@helper.form(call){
+	@formError(theForm)
+	
+	@formInput(theForm, "text", "round", "Turnierrunde")
+	
+	@formInput(theForm, "text", "player1Wins", "Siege (Spieler 1)")
+	@formInput(theForm, "text", "player2Wins", "Siege (Spieler 2)")
+	
+	@formSelectParticipant(theForm, "player1Id", "Spieler 1", participations)
+	@formSelectParticipant(theForm, "player2Id", "Spieler 2", participations)
+
+ 	@formButton(buttonCaption)
+}

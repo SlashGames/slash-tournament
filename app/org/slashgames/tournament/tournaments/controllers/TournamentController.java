@@ -3,8 +3,10 @@ package org.slashgames.tournament.tournaments.controllers;
 import java.util.List;
 
 import org.slashgames.tournament.auth.security.SecuredAdmin;
+import org.slashgames.tournament.tournaments.modelcontrollers.MatchModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Tournament;
+import org.slashgames.tournament.tournaments.models.TournamentMatch;
 
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -18,6 +20,13 @@ public class TournamentController extends Controller {
 				.render(tournaments));
 	}
 
+	public static Result matches(Long id) {
+		Tournament tournament = TournamentModelController.findById(id);
+		List<TournamentMatch> matches = MatchModelController.getMatches(tournament);
+		return ok(org.slashgames.tournament.tournaments.views.html.matches
+				.render(tournament, matches));
+	}
+	
 	public static Result tournament(Long id) {
 		Tournament tournament = TournamentModelController.findById(id);
 		return ok(org.slashgames.tournament.tournaments.views.html.tournament

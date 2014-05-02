@@ -1,0 +1,21 @@
+@(tournament: org.slashgames.tournament.tournaments.models.Tournament, matches: List[org.slashgames.tournament.tournaments.models.TournamentMatch])
+
+@import org.slashgames.tournament.core.views.html.main
+
+@main("Matches - " + tournament.name) {
+	<div class="row">
+	   	<div class="col-md-2"><strong>Runde</strong></div>
+	   	<div class="col-md-2"><strong>Spieler 1</strong></div>
+	   	<div class="col-md-2"><strong>Ergebnis</strong></div>
+	   	<div class="col-md-2"><strong>Spieler 2</strong></div>
+    </div>
+    
+	@for(tournamentMatch <- matches) {
+		<div class="row">
+		   	<div class="col-md-2">@tournamentMatch.round</div>		
+		   	<div class="col-md-2">@tournamentMatch.player1.name</div>
+		   	<div class="col-md-2">@tournamentMatch.player1Wins - @tournamentMatch.player2Wins</div>
+		   	<div class="col-md-2">@tournamentMatch.player2.name</div>
+	    </div>
+	}
+}

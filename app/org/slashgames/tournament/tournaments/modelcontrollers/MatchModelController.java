@@ -21,6 +21,10 @@ public class MatchModelController {
 		match.save();
 	}
 	
+	public static List<TournamentMatch> getMatches(Tournament tournament) {
+		return find.where().eq("tournament", tournament).findList();
+	}
+	
 	public static List<TournamentMatch> getMatches(Tournament tournament, Integer round) {
 		return find.where().eq("tournament", tournament).eq("round", round).findList();
 	}

@@ -30,6 +30,8 @@ POST	/cms/tournament/edit/:id	org.slashgames.tournament.cms.controllers.Tourname
 
 GET 	/cms/match/add				org.slashgames.tournament.cms.controllers.MatchCMSController.addMatch(id: Long)
 POST	/cms/match/add				org.slashgames.tournament.cms.controllers.MatchCMSController.addMatchSubmit(id: Long)
+GET 	/cms/match/edit/:id			org.slashgames.tournament.cms.controllers.MatchCMSController.editMatch(id: Long)
+POST	/cms/match/edit/:id			org.slashgames.tournament.cms.controllers.MatchCMSController.editMatchSubmit(id: Long)
 
 GET     /cms/hearthstone/participant/confirmRemove/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.confirmRemoveParticipant(id: Long)
 GET	    /cms/hearthstone/participant/remove/:id			org.slashgames.tournament.hearthstone.controllers.HearthstoneController.removeParticipant(id: Long)

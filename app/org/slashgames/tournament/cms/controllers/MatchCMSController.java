@@ -8,11 +8,13 @@ import org.slashgames.tournament.auth.security.SecuredAdmin;
 import org.slashgames.tournament.cms.formdata.MatchData;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addMatch;
+import org.slashgames.tournament.cms.views.html.editMatch;
 import org.slashgames.tournament.tournaments.modelcontrollers.MatchModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
+import org.slashgames.tournament.tournaments.models.TournamentMatch;
 
 import play.data.Form;
 import play.mvc.Controller;
@@ -28,6 +30,21 @@ public class MatchCMSController extends Controller {
 		return ok(addMatch.render(tournamentId, form(MatchData.class), participations));
 	}
 	
+	public static Result editMatch(Long id) {
+		// Create form.
+		Form<MatchData> form = form(MatchData.class);
+
+		// Fill form.
+		TournamentMatch match = MatchModelController.findById(id);
+		MatchData data = new MatchData();
+		data.fill(match);
+		form = form.fill(data);
+
+		List<Participation> participations = ParticipationModelController.getParticipations(match.tournament);
+		
+		return ok(editMatch.render(id, form, participations));
+	}
+	
 	public static Result addMatchSubmit(Long tournamentId) {
 		Form<MatchData> matchForm = form(MatchData.class).bindFromRequest();
 		Tournament tournament = TournamentModelController.findById(tournamentId);
@@ -40,6 +57,23 @@ public class MatchCMSController extends Controller {
 			MatchModelController.addMatch(tournament, data);
 			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
 					.matches(tournamentId));
+		}
+	}
+	
+	public static Result editMatchSubmit(Long id) {
+		Form<MatchData> matchForm = form(MatchData.class)
+				.bindFromRequest();
+		TournamentMatch match = MatchModelController.findById(id);
+		
+		if (matchForm.hasErrors()) {
+			List<Participation> participations = ParticipationModelController.getParticipations(match.tournament);
+			return badRequest(editMatch.render(id, matchForm, participations));
+		} else {
+
+			MatchData data = matchForm.get();
+			MatchModelController.updateMatch(match, data);
+			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
+					.matches(match.tournament.id));
 		}
 	}
 }

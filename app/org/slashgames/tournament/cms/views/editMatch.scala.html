@@ -1,0 +1,8 @@
+@(matchId: Long, theForm: Form[org.slashgames.tournament.cms.formdata.MatchData], participations: List[org.slashgames.tournament.tournaments.models.Participation])
+
+@import org.slashgames.tournament.core.views.html._
+@import org.slashgames.tournament.cms.views.html.forms._
+
+@main("Match bearbeiten") {
+	@matchForm(theForm, participations, org.slashgames.tournament.cms.controllers.routes.MatchCMSController.editMatchSubmit(matchId), "Match aktualisieren")
+}

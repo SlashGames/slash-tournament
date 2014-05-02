@@ -15,6 +15,10 @@ public class MatchModelController {
 	private static Model.Finder<Long, TournamentMatch> find = new Model.Finder<Long, TournamentMatch>(
 			Long.class, TournamentMatch.class);
 	
+	public static TournamentMatch findById(Long id) {
+		return find.byId(id);
+	}
+	
 	public static void addMatch(Tournament tournament, Integer round, User player1, User player2) {
 		TournamentMatch match = new TournamentMatch();
 		match.tournament = tournament;
@@ -35,11 +39,12 @@ public class MatchModelController {
 	public static void addMatch(Tournament tournament, MatchData data) {
 		TournamentMatch match = new TournamentMatch();
 		match.tournament = tournament;
+		updateMatch(match, data);
+	}
+
+	public static void updateMatch(TournamentMatch match, MatchData data) {
 		match.round = data.round;
-		
-		Logger.info(data.player1Id);
 		match.player1 = UserModelController.getUser(data.player1Id);
-		Logger.info(match.player1.email);
 		match.player2 = UserModelController.getUser(data.player2Id);
 		match.player1Wins = data.player1Wins;
 		match.player2Wins = data.player2Wins;

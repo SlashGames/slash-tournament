@@ -8,6 +8,10 @@
 	   	<div class="col-md-2"><strong>Spieler 1</strong></div>
 	   	<div class="col-md-2"><strong>Ergebnis</strong></div>
 	   	<div class="col-md-2"><strong>Spieler 2</strong></div>
+	   	
+	  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+			<div class="col-md-2"><strong>Administration</strong></div>
+		}
     </div>
     
 	@for(tournamentMatch <- matches) {
@@ -16,6 +20,10 @@
 		   	<div class="col-md-2">@if(tournamentMatch.player1 != null) { @tournamentMatch.player1.name } else { BYE }</div>
 		   	<div class="col-md-2">@tournamentMatch.player1Wins - @tournamentMatch.player2Wins</div>
 		   	<div class="col-md-2">@if(tournamentMatch.player2 != null) { @tournamentMatch.player2.name } else { BYE }</div>
+		   	
+		  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+				<div class="col-md-2"><a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.editMatch(tournamentMatch.id)">bearbeiten</a></div>
+			}
 	    </div>
 	}
 	

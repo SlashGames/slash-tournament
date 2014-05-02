@@ -22,8 +22,8 @@ public class MatchData {
 	}
 	
 	public void fill(TournamentMatch match) {
-		this.player1Id = match.player1.email;
-		this.player2Id = match.player2.email;
+		this.player1Id = match.player1 != null ? match.player1.email : null;
+		this.player2Id = match.player2 != null ? match.player2.email : null;
 		this.round = match.round;
 		this.player1Wins = match.player1Wins;
 		this.player2Wins = match.player2Wins;

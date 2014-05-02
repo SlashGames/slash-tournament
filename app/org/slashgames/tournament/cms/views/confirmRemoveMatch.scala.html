@@ -1,0 +1,19 @@
+@(tournamentMatch: org.slashgames.tournament.tournaments.models.TournamentMatch)
+
+@import org.slashgames.tournament.core.views.html._
+
+@main("Match entfernen") {
+	<p>Match entfernen?</p>
+	
+	<ul><strong>Turnier: </strong> @tournamentMatch.tournament.name</ul>
+	<ul><strong>Runde: </strong> @tournamentMatch.round</ul>
+	<ul><strong>Spieler 1: </strong>@tournamentMatch.player1.name</ul>
+	<ul><strong>Spieler 2: </strong>@tournamentMatch.player2.name</ul>
+	<ul><strong>Punkte (Spieler 1): </strong>@tournamentMatch.player1Wins</ul>
+	<ul><strong>Punkte (Spieler 2): </strong>@tournamentMatch.player2Wins</ul>
+	
+	<p>
+		<a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.removeMatch(tournamentMatch.id)">ja</a>
+		<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournamentMatch.tournament.id)">nein</a>
+	</p>
+}

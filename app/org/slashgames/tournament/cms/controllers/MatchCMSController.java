@@ -9,6 +9,8 @@ import org.slashgames.tournament.cms.formdata.MatchData;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.cms.views.html.addMatch;
 import org.slashgames.tournament.cms.views.html.editMatch;
+import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
+import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import org.slashgames.tournament.tournaments.modelcontrollers.MatchModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
@@ -75,5 +77,19 @@ public class MatchCMSController extends Controller {
 			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
 					.matches(match.tournament.id));
 		}
+	}
+	
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result confirmRemoveMatch(Long matchId) {
+		TournamentMatch match = MatchModelController.findById(matchId);
+		return ok(org.slashgames.tournament.cms.views.html.confirmRemoveMatch.render(match));
+	}
+
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result removeMatch(Long matchId) {
+		TournamentMatch match = MatchModelController.findById(matchId);
+		Tournament tournament = match.tournament;
+		MatchModelController.removeMatch(match);
+		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournament.id));
 	}
 }

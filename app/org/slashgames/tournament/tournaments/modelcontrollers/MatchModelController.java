@@ -50,4 +50,8 @@ public class MatchModelController {
 		match.player2Wins = data.player2Wins;
 		match.save();
 	}
+
+	public static void removeMatch(TournamentMatch match) {
+		match.delete();
+	}
 }

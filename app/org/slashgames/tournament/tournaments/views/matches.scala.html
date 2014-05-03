@@ -3,6 +3,8 @@
 @import org.slashgames.tournament.core.views.html.main
 
 @main("Matches - " + tournament.name) {
+	<p><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournament.id)">Zur&uuml;ck zum Turnier</a></p>
+	
 	<div class="row">
 	   	<div class="col-md-2"><strong>Runde</strong></div>
 	   	<div class="col-md-2"><strong>Spieler 1</strong></div>

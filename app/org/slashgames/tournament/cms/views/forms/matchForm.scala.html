@@ -7,11 +7,11 @@
 	
 	@formInput(theForm, "text", "round", "Turnierrunde")
 	
+	@formSelectParticipant(theForm, "player1Id", "Spieler 1", participations)
+	@formSelectParticipant(theForm, "player2Id", "Spieler 2", participations)
+	
 	@formInput(theForm, "text", "player1Wins", "Siege (Spieler 1)")
 	@formInput(theForm, "text", "player2Wins", "Siege (Spieler 2)")
 	
-	@formSelectParticipant(theForm, "player1Id", "Spieler 1", participations)
-	@formSelectParticipant(theForm, "player2Id", "Spieler 2", participations)
-
  	@formButton(buttonCaption)
 }

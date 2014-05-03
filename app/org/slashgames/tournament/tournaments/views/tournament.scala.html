@@ -1,4 +1,4 @@
-@(tournament: org.slashgames.tournament.tournaments.models.Tournament)
+@(tournament: org.slashgames.tournament.tournaments.models.Tournament, performances: List[org.slashgames.tournament.tournaments.models.TournamentPerformance])
 
 @import org.slashgames.tournament.core.views.html.main
 @import org.slashgames.tournament.tournaments.models._
@@ -32,6 +32,26 @@
 	
 	<h3>Tabelle</h3>
 	
+	<div class="row">
+	   	<div class="col-md-2"><strong>Name</strong></div>
+	   	<div class="col-md-1"><strong>Matches</strong></div>
+	   	<div class="col-md-1"><strong>Punkte</strong></div>
+	   	<div class="col-md-1"><strong>Siege</strong></div>
+	   	<div class="col-md-1"><strong>Niederlagen</strong></div>
+	   	<div class="col-md-1"><strong>Differenz</strong></div>
+    </div>
+    
+    @for(performance <- performances) {
+    	<div class="row">
+		   	<div class="col-md-2">@performance.player.name</div>
+		   	<div class="col-md-1">@performance.matches</div>
+		   	<div class="col-md-1">@performance.score</div>
+		   	<div class="col-md-1">@performance.wins</div>
+		   	<div class="col-md-1">@performance.losses</div>
+		   	<div class="col-md-1">@(performance.wins - performance.losses)</div>
+    	</div>
+    }
+    
 	<p><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournament.id)">Match&uuml;bersicht anzeigen</a></p>
 
 	<h3>Regeln</h3>
@@ -71,7 +91,7 @@
 			   	</div>
 			   	
 			  	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
-					<div class="col-md-2"><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.confirmRemoveParticipant(participation.id)">entfernen</a></div>
+					<div class="col-md-2"><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.confirmRemoveParticipant(participation.id)">[entfernen]</a></div>
 				}
 		    </div>
 		}

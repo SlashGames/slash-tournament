@@ -1,9 +1,17 @@
-@(participations: List[org.slashgames.tournament.tournaments.models.Participation])
+@(participations: List[org.slashgames.tournament.tournaments.models.Participation], level: Integer, xpAcquiredForLevelUp: Integer, xpRequiredForLevelUp: Integer, xpForLevelUpRatio: Integer)
 
 @import org.slashgames.tournament.tournaments.models._
 @import org.slashgames.tournament.tournaments.views.html._
 
 @main("Dashboard") {
+	<h3>Level @level</h3>
+	
+	<div class="progress">
+	  	<div class="progress-bar" role="progressbar" aria-valuenow="@xpAcquiredForLevelUp" aria-valuemin="0" aria-valuemax="@xpRequiredForLevelUp" style="width: @(xpForLevelUpRatio + "%");">
+	    	<span>@xpAcquiredForLevelUp / @xpRequiredForLevelUp XP</span>
+	  	</div>
+	</div>
+	
 	<h3>Aktuelles Turnier</h3>
 
 	@for(participation <- participations) {

@@ -8,6 +8,8 @@ import org.slashgames.tournament.cms.formdata.MatchData;
 import org.slashgames.tournament.tournaments.models.TournamentMatch;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
+import com.avaje.ebean.Expr;
+
 import play.Logger;
 import play.db.ebean.Model;
 
@@ -36,6 +38,10 @@ public class MatchModelController {
 		return find.where().eq("tournament", tournament).eq("round", round).findList();
 	}
 
+	public static List<TournamentMatch> getMatches(User user) {
+		return find.where().or(Expr.eq("player1", user), Expr.eq("player2", user)).findList();
+	}
+	
 	public static void addMatch(Tournament tournament, MatchData data) {
 		TournamentMatch match = new TournamentMatch();
 		match.tournament = tournament;

@@ -33,22 +33,24 @@
 	<h3>Tabelle</h3>
 	
 	<div class="row">
+		<div class="col-md-1"><strong>Platz</strong></div>
 	   	<div class="col-md-2"><strong>Name</strong></div>
 	   	<div class="col-md-1"><strong>Matches</strong></div>
-	   	<div class="col-md-1"><strong>Punkte</strong></div>
 	   	<div class="col-md-1"><strong>Siege</strong></div>
 	   	<div class="col-md-1"><strong>Niederlagen</strong></div>
 	   	<div class="col-md-1"><strong>Differenz</strong></div>
+	   	<div class="col-md-1"><strong>Punkte</strong></div>
     </div>
     
     @for(performance <- performances) {
     	<div class="row">
+    		<div class="col-md-1">@performance.rank.</div>
 		   	<div class="col-md-2">@performance.player.name</div>
 		   	<div class="col-md-1">@performance.matches</div>
-		   	<div class="col-md-1">@performance.score</div>
 		   	<div class="col-md-1">@performance.wins</div>
 		   	<div class="col-md-1">@performance.losses</div>
 		   	<div class="col-md-1">@(performance.wins - performance.losses)</div>
+		   	<div class="col-md-1">@performance.score</div>
     	</div>
     }
     

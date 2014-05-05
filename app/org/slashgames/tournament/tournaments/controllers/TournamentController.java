@@ -104,7 +104,13 @@ public class TournamentController extends Controller {
 		}
 		
 		// Sort list.
-		return ordering.sortedCopy(performance.values());
+		List<TournamentPerformance> performanceList = ordering.sortedCopy(performance.values());
+		
+		for (int i = 0; i < performanceList.size(); i++) {
+			performanceList.get(i).rank = i + 1;
+		}
+		
+		return performanceList;
 	}
 	
 	@Security.Authenticated(SecuredAdmin.class)

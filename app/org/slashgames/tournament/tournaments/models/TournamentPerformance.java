@@ -13,6 +13,8 @@ public class TournamentPerformance {
 	
 	public int losses;
 	
+	public int rank;
+	
 	public TournamentPerformance(User player) {
 		this.player = player;
 	}

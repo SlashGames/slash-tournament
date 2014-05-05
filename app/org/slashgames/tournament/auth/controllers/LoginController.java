@@ -2,6 +2,7 @@ package org.slashgames.tournament.auth.controllers;
 
 import static play.data.Form.form;
 
+import org.slashgames.tournament.auth.formdata.ForgotPasswordData;
 import org.slashgames.tournament.auth.formdata.LoginData;
 import org.slashgames.tournament.auth.formdata.SignupData;
 import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
@@ -12,6 +13,8 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import com.typesafe.plugin.*;
 
 public class LoginController extends Controller {
 	public static final String SESSION_CURRENT_USER = "currentUser";
@@ -75,5 +78,35 @@ public class LoginController extends Controller {
 		session().clear();
 		return redirect(org.slashgames.tournament.core.controllers.routes.Application
 				.index());
+	}
+	
+	public static Result forgotPassword() {
+		return ok(org.slashgames.tournament.auth.views.html.forgotPassword
+				.render(form(ForgotPasswordData.class)));
+	}
+	
+	public static Result forgotPasswordSubmit() {
+		Form<ForgotPasswordData> form = form(ForgotPasswordData.class).bindFromRequest();
+		if (form.hasErrors()) {
+			return badRequest(org.slashgames.tournament.auth.views.html.forgotPassword
+					.render(form));
+		}
+		
+		ForgotPasswordData data = form.get();
+		String email = data.email;
+		User user = UserModelController.getUser(email);
+		
+		if (user != null) {
+			String mailBody = org.slashgames.tournament.auth.views.txt.mails.resetPasswordMail.render(user.name).body();
+			
+			MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
+			mail.setSubject("Passwort vergessen");
+			mail.addRecipient(String.format("%s <%s>", user.name, email));
+			mail.addFrom("slash games Turniersystem <noreply@slash-tournament.slashgames.cloudbees.net");
+			mail.send(mailBody);
+		}
+
+		return ok(org.slashgames.tournament.auth.views.html.forgotPasswordSuccess
+				.render(email));
 	}
 }

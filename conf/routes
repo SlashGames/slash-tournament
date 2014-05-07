@@ -18,7 +18,8 @@ GET     /auth/logout               		org.slashgames.tournament.auth.controllers.
 GET     /auth/signup               		org.slashgames.tournament.auth.controllers.LoginController.signup()
 POST    /auth/signup               		org.slashgames.tournament.auth.controllers.LoginController.signupSubmit()
 GET		/auth/forgotpassword			org.slashgames.tournament.auth.controllers.LoginController.forgotPassword()
-POST	/auth/forgotpassword			org.slashgames.tournament.auth.controllers.LoginController.forgotPasswordSubmit()
+POST	/auth/resetpassword				org.slashgames.tournament.auth.controllers.LoginController.resetPassword()
+POST	/auth/resetpassword/:email		org.slashgames.tournament.auth.controllers.LoginController.resetPasswordSubmit(email: String)
 
 # Hearthstone
 GET     /hearthstone/participate/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.participate(id: Long)

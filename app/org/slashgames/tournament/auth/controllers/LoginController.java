@@ -4,6 +4,7 @@ import static play.data.Form.form;
 
 import org.slashgames.tournament.auth.formdata.ForgotPasswordData;
 import org.slashgames.tournament.auth.formdata.LoginData;
+import org.slashgames.tournament.auth.formdata.ResetPasswordData;
 import org.slashgames.tournament.auth.formdata.SignupData;
 import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
 import org.slashgames.tournament.auth.models.User;
@@ -85,7 +86,7 @@ public class LoginController extends Controller {
 				.render(form(ForgotPasswordData.class)));
 	}
 	
-	public static Result forgotPasswordSubmit() {
+	public static Result resetPassword() {
 		Form<ForgotPasswordData> form = form(ForgotPasswordData.class).bindFromRequest();
 		if (form.hasErrors()) {
 			return badRequest(org.slashgames.tournament.auth.views.html.forgotPassword
@@ -106,7 +107,24 @@ public class LoginController extends Controller {
 			mail.send(mailBody);
 		}
 
-		return ok(org.slashgames.tournament.auth.views.html.forgotPasswordSuccess
-				.render(email));
+		return ok(org.slashgames.tournament.auth.views.html.resetPassword
+				.render(form(ResetPasswordData.class), email));
+	}
+	
+	public static Result resetPasswordSubmit(String email) {
+		Form<ResetPasswordData> form = form(ResetPasswordData.class).bindFromRequest();
+		if (form.hasErrors()) {
+			return badRequest(org.slashgames.tournament.auth.views.html.resetPassword
+					.render(form, email));
+		}
+		
+		ResetPasswordData data = form.get();
+		
+		User user = UserModelController.getUser(email);
+		String code = data.code;
+		String password = PasswordEncryption.encryptPassword(data.password);
+		
+		return ok(org.slashgames.tournament.core.views.html.message
+				.render("Erfolg", "Erfolg!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
 	}
 }

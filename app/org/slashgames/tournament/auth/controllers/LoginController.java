@@ -6,7 +6,10 @@ import org.slashgames.tournament.auth.formdata.ForgotPasswordData;
 import org.slashgames.tournament.auth.formdata.LoginData;
 import org.slashgames.tournament.auth.formdata.ResetPasswordData;
 import org.slashgames.tournament.auth.formdata.SignupData;
+import org.slashgames.tournament.auth.modelcontrollers.TokenModelController;
 import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
+import org.slashgames.tournament.auth.models.Token;
+import org.slashgames.tournament.auth.models.Token.TokenType;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.auth.util.PasswordEncryption;
 
@@ -93,12 +96,17 @@ public class LoginController extends Controller {
 					.render(form));
 		}
 		
+		// Get form data.
 		ForgotPasswordData data = form.get();
 		String email = data.email;
 		User user = UserModelController.getUser(email);
 		
 		if (user != null) {
-			String mailBody = org.slashgames.tournament.auth.views.txt.mails.resetPasswordMail.render(user.name).body();
+			// Create token.
+			Token token = TokenModelController.addToken(user, TokenType.PASSWORD_RESET);
+			
+			// Send mail.
+			String mailBody = org.slashgames.tournament.auth.views.txt.mails.resetPasswordMail.render(user.name, token.code).body();
 			
 			MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
 			mail.setSubject("Passwort vergessen");
@@ -124,7 +132,19 @@ public class LoginController extends Controller {
 		String code = data.code;
 		String password = PasswordEncryption.encryptPassword(data.password);
 		
-		return ok(org.slashgames.tournament.core.views.html.message
-				.render("Erfolg", "Erfolg!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
+		Token token = TokenModelController.getUserToken(user, TokenType.PASSWORD_RESET);
+		
+		if (token == null || !token.isValid() || !token.code.equals(code.toUpperCase())) {
+			TokenModelController.deleteToken(token);
+			
+			return ok(org.slashgames.tournament.core.views.html.message
+					.render("Fehler", "Der angegebene Code ist abgelaufen oder ungültig. Bitte fordere einen neuen an!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
+		} else {
+			TokenModelController.deleteToken(token);
+			UserModelController.changePasswort(user, password);
+			
+			return ok(org.slashgames.tournament.core.views.html.message
+					.render("Erfolg", "Dein Password wurde geändert!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
+		}
 	}
 }

@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-	"mysql" % "mysql-connector-java" % "5.1.30"
+	"mysql" % "mysql-connector-java" % "5.1.30",
+	"com.typesafe" %% "play-plugins-mailer" % "2.1-RC2"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(

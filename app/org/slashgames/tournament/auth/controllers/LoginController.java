@@ -2,9 +2,14 @@ package org.slashgames.tournament.auth.controllers;
 
 import static play.data.Form.form;
 
+import org.slashgames.tournament.auth.formdata.ForgotPasswordData;
 import org.slashgames.tournament.auth.formdata.LoginData;
+import org.slashgames.tournament.auth.formdata.ResetPasswordData;
 import org.slashgames.tournament.auth.formdata.SignupData;
+import org.slashgames.tournament.auth.modelcontrollers.TokenModelController;
 import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
+import org.slashgames.tournament.auth.models.Token;
+import org.slashgames.tournament.auth.models.Token.TokenType;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.auth.util.PasswordEncryption;
 
@@ -12,6 +17,8 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import com.typesafe.plugin.*;
 
 public class LoginController extends Controller {
 	public static final String SESSION_CURRENT_USER = "currentUser";
@@ -75,5 +82,69 @@ public class LoginController extends Controller {
 		session().clear();
 		return redirect(org.slashgames.tournament.core.controllers.routes.Application
 				.index());
+	}
+	
+	public static Result forgotPassword() {
+		return ok(org.slashgames.tournament.auth.views.html.forgotPassword
+				.render(form(ForgotPasswordData.class)));
+	}
+	
+	public static Result resetPassword() {
+		Form<ForgotPasswordData> form = form(ForgotPasswordData.class).bindFromRequest();
+		if (form.hasErrors()) {
+			return badRequest(org.slashgames.tournament.auth.views.html.forgotPassword
+					.render(form));
+		}
+		
+		// Get form data.
+		ForgotPasswordData data = form.get();
+		String email = data.email;
+		User user = UserModelController.getUser(email);
+		
+		if (user != null) {
+			// Create token.
+			Token token = TokenModelController.addToken(user, TokenType.PASSWORD_RESET);
+			
+			// Send mail.
+			String mailBody = org.slashgames.tournament.auth.views.txt.mails.resetPasswordMail.render(user.name, token.code).body();
+			
+			MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
+			mail.setSubject("Passwort vergessen");
+			mail.addRecipient(String.format("%s <%s>", user.name, email));
+			mail.addFrom("slash games Turniersystem <noreply@slash-tournament.slashgames.cloudbees.net");
+			mail.send(mailBody);
+		}
+
+		return ok(org.slashgames.tournament.auth.views.html.resetPassword
+				.render(form(ResetPasswordData.class), email));
+	}
+	
+	public static Result resetPasswordSubmit(String email) {
+		Form<ResetPasswordData> form = form(ResetPasswordData.class).bindFromRequest();
+		if (form.hasErrors()) {
+			return badRequest(org.slashgames.tournament.auth.views.html.resetPassword
+					.render(form, email));
+		}
+		
+		ResetPasswordData data = form.get();
+		
+		User user = UserModelController.getUser(email);
+		String code = data.code;
+		String password = PasswordEncryption.encryptPassword(data.password);
+		
+		Token token = TokenModelController.getUserToken(user, TokenType.PASSWORD_RESET);
+		
+		if (token == null || !token.isValid() || !token.code.equals(code.toUpperCase())) {
+			TokenModelController.deleteToken(token);
+			
+			return ok(org.slashgames.tournament.core.views.html.message
+					.render("Fehler", "Der angegebene Code ist abgelaufen oder ungültig. Bitte fordere einen neuen an!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
+		} else {
+			TokenModelController.deleteToken(token);
+			UserModelController.changePasswort(user, password);
+			
+			return ok(org.slashgames.tournament.core.views.html.message
+					.render("Erfolg", "Dein Password wurde geändert!", "Zurück zum Login", org.slashgames.tournament.auth.controllers.routes.LoginController.login()));
+		}
 	}
 }

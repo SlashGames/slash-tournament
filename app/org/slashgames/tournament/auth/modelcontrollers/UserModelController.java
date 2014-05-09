@@ -28,4 +28,9 @@ public class UserModelController {
 		return find.where().eq("email", email)
 				.eq("password", encryptedPassword).findUnique();
 	}
+
+	public static void changePasswort(User user, String password) {
+		user.password = password;
+		user.save();
+	}
 }

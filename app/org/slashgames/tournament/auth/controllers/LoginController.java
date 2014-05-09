@@ -111,7 +111,7 @@ public class LoginController extends Controller {
 			MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
 			mail.setSubject("Passwort vergessen");
 			mail.addRecipient(String.format("%s <%s>", user.name, email));
-			mail.addFrom("slash games Turniersystem <noreply@slash-tournament.slashgames.cloudbees.net");
+			mail.addFrom("slash games Turniersystem <noreply@slash-tournament.slashgames.cloudbees.net>");
 			mail.send(mailBody);
 		}
 

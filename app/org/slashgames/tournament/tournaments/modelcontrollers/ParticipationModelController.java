@@ -44,6 +44,11 @@ public class ParticipationModelController {
 	}
 
 	public static void removeParticipant(User participant, Tournament tournament) {
+		// Don't allow to unparticipate when signup is closed.
+		if (tournament.status != TournamentStatus.SIGNUP) {
+			return;
+		}
+		
 		HearthstoneParticipationModelController.removeParticipation(participant, tournament);
 		
 		Participation participation = getParticipation(participant, tournament);

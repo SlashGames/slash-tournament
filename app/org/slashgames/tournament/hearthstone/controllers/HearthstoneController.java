@@ -12,6 +12,7 @@ import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationDa
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneClassModelController;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
+import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
@@ -22,7 +23,7 @@ import play.mvc.Security;
 
 public class HearthstoneController extends Controller {
 	@Security.Authenticated(Secured.class)
-	public static Result participate(Long tournamentId) {
+	public static Result checkin(Long tournamentId) {
 		// Prepare form.
 		Form<HearthstoneParticipationData> form = form(HearthstoneParticipationData.class);
 		List<String> classes = HearthstoneClassModelController.getClassNames();
@@ -45,7 +46,7 @@ public class HearthstoneController extends Controller {
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result participateSubmit(Long tournamentId) {
+	public static Result checkinSubmit(Long tournamentId) {
 		Form<HearthstoneParticipationData> participationForm = form(
 				HearthstoneParticipationData.class).bindFromRequest();
 		Tournament tournament = TournamentModelController
@@ -82,13 +83,13 @@ public class HearthstoneController extends Controller {
 		Long tournamentId = hearthstoneParticipation.participation.tournament.id;
 		
 		// Remove participant.
-		HearthstoneParticipationModelController.removeParticipation(participationId);
+		ParticipationModelController.removeParticipant(hearthstoneParticipation.participation.participant, hearthstoneParticipation.participation.tournament);
 		
 		// Redirect to tournament page.
 		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournamentId));
 	}
 	
-	public static boolean isParticipating(Tournament tournament) {
+	public static boolean isCheckedIn(Tournament tournament) {
 		User currentUser = LoginController.getCurrentUser();
 		return HearthstoneParticipationModelController.isParticipating(
 				currentUser, tournament);

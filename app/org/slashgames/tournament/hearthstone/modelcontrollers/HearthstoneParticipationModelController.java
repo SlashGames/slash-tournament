@@ -6,7 +6,9 @@ import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
 import org.slashgames.tournament.hearthstone.models.HearthstoneDeck;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
+import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.models.Participation;
+import org.slashgames.tournament.tournaments.models.ParticipationStatus;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
@@ -38,6 +40,7 @@ public class HearthstoneParticipationModelController {
 	public static void addOrUpdateParticipation(User participant,
 			Tournament tournament, HearthstoneParticipationData data) {
 
+		Participation participation = ParticipationModelController.getParticipation(participant, tournament);
 		HearthstoneParticipation hearthstoneParticipation = getParticipation(participant,
 				tournament);
 
@@ -48,11 +51,12 @@ public class HearthstoneParticipationModelController {
 			}
 			
 			hearthstoneParticipation = new HearthstoneParticipation();
-			hearthstoneParticipation.participation = new Participation();
+			hearthstoneParticipation.participation = participation;
+			
+			// Marked as checked in.
+			hearthstoneParticipation.participation.participationStatus = ParticipationStatus.CHECKED_IN;
+			hearthstoneParticipation.participation.save();
 		}
-
-		hearthstoneParticipation.participation.participant = participant;
-		hearthstoneParticipation.participation.tournament = tournament;
 
 		hearthstoneParticipation.battleTag = data.battleTag;
 
@@ -76,15 +80,14 @@ public class HearthstoneParticipationModelController {
 
 		hearthstoneParticipation.seedRank = Integer.parseInt(data.seedRank);
 
-		hearthstoneParticipation.participation.save();
 		hearthstoneParticipation.save();
 	}
 
-	public static void removeParticipation(Long participationId) {
-		HearthstoneParticipation hearthstoneParticipation = getParticipation(participationId);
-		Participation participation = hearthstoneParticipation.participation;
-		
-		hearthstoneParticipation.delete();
-		participation.delete();
+	public static void removeParticipation(User participant,
+			Tournament tournament) {
+		HearthstoneParticipation hearthstoneParticipation = getParticipation(participant, tournament);
+		if (hearthstoneParticipation != null) {
+			hearthstoneParticipation.delete();
+		}
 	}
 }

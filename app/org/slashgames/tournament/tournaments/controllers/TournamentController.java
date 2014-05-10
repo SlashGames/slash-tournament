@@ -1,22 +1,31 @@
 package org.slashgames.tournament.tournaments.controllers;
 
+import static play.data.Form.form;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.slashgames.tournament.auth.controllers.LoginController;
 import org.slashgames.tournament.auth.models.User;
+import org.slashgames.tournament.auth.security.Secured;
 import org.slashgames.tournament.auth.security.SecuredAdmin;
+import org.slashgames.tournament.hearthstone.formdata.HearthstoneParticipationData;
+import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneClassModelController;
+import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.MatchModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
 import org.slashgames.tournament.tournaments.models.Participation;
+import org.slashgames.tournament.tournaments.models.ParticipationStatus;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentMatch;
 import org.slashgames.tournament.tournaments.models.TournamentPerformance;
 
 import com.google.common.collect.Ordering;
 
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -42,6 +51,24 @@ public class TournamentController extends Controller {
 			return (result != 0) ? result : p1.player.name.compareTo(p2.player.name);
 		}
 	});
+	
+	@Security.Authenticated(Secured.class)
+	public static Result participate(Long tournamentId) {
+		Tournament tournament = TournamentModelController.findById(tournamentId);
+		User participant = LoginController.getCurrentUser();
+		ParticipationModelController.addParticipant(participant, tournament);
+		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
+				.tournament(tournament.id));
+	}
+	
+	@Security.Authenticated(Secured.class)
+	public static Result unparticipate(Long tournamentId) {
+		Tournament tournament = TournamentModelController.findById(tournamentId);
+		User participant = LoginController.getCurrentUser();
+		ParticipationModelController.removeParticipant(participant, tournament);
+		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
+				.tournament(tournament.id));
+	}
 	
 	public static Result tournaments() {
 		List<Tournament> tournaments = TournamentModelController
@@ -72,7 +99,9 @@ public class TournamentController extends Controller {
 		Hashtable<User, TournamentPerformance> performance = new Hashtable<User, TournamentPerformance>();
 		
 		for (Participation participation : participations) {
-			performance.put(participation.participant, new TournamentPerformance(participation.participant));
+			if (participation.participationStatus == ParticipationStatus.CHECKED_IN) {
+				performance.put(participation.participant, new TournamentPerformance(participation.participant));
+			}
 		}
 		
 		// Process match data.
@@ -111,6 +140,11 @@ public class TournamentController extends Controller {
 		}
 		
 		return performanceList;
+	}
+	
+	public static boolean isParticipating(Tournament tournament) {
+		User currentUser = LoginController.getCurrentUser();
+		return ParticipationModelController.isParticipating(currentUser, tournament);
 	}
 	
 	@Security.Authenticated(SecuredAdmin.class)

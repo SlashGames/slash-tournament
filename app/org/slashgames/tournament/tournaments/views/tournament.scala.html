@@ -16,14 +16,14 @@
 					@if(tournament.game.name.equals("Hearthstone")) {
 						@if(org.slashgames.tournament.hearthstone.controllers.HearthstoneController.isCheckedIn(tournament)) {
 							<p>Du bist eingecheckt.</p>
-							<p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.checkin(tournament.id)">[Teilnahmedaten &auml;ndern]</a>
+							@if(tournament.status == TournamentStatus.SIGNUP) { <p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.checkin(tournament.id)">[Teilnahmedaten &auml;ndern]</a> }
 						} else {
-							<p>Du nimmst an diesem Turnier teil.</p>
-							<p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.checkin(tournament.id)">[Einchecken]</a>
+							<p>Du bist nicht eingecheckt.</p>
+							@if(tournament.status == TournamentStatus.SIGNUP) { <p><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.checkin(tournament.id)">[Einchecken]</a> }
 						}
 					}
 					
-					<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.unparticipate(tournament.id)">[Vom Turnier abmelden]</a></p>
+					@if(tournament.status == TournamentStatus.SIGNUP) { <a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.unparticipate(tournament.id)">[Vom Turnier abmelden]</a></p> }
 			} else { @if(tournament.status == TournamentStatus.SIGNUP) {
 				<p>Du nimmst an diesem Turnier noch nicht teil.</p>
 				<p><a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.participate(tournament.id)">[An diesem Turnier teilnehmen]</a></p>

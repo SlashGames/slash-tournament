@@ -4,12 +4,12 @@
 @import org.slashgames.tournament.core.views.html.forms._
 @import org.slashgames.tournament.tournaments.views.html._
 
-@main("An Turnier teilnehmen") {
+@main("Check-In") {
 	<h4>@theTournament.name</h4>
 			
 	@tournamentDetails(theTournament)
 
-	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.participateSubmit(theTournament.id)){
+	@helper.form(org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.checkinSubmit(theTournament.id)){
 		@formError(participateForm)
 		
 		@formInput(participateForm, "text", "battleTag", "BattleTag", "Dein Battle.net Nickname mit numerischem BattleTag-Code (z.B. ArdoR#2629)")

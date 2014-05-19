@@ -73,7 +73,9 @@
 	
 	@if(!org.slashgames.tournament.core.util.StringHelper.isNullOrEmpty(tournament.rules)) {
 		<h4>Turnierregeln</h4>
-		<p>@tournament.rules</p>
+		<p>
+			@Html(tournament.rules)
+		</p>
 	}
 	
 	<h3>Teilnehmer</h3>

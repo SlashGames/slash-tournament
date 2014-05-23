@@ -18,7 +18,7 @@ public class TournamentModelController {
 			Long.class, Tournament.class);
 
 	public static List<Tournament> getTournaments() {
-		return find.all();
+		return find.orderBy("date").findList();
 	}
 
 	public static Tournament findById(Long id) {

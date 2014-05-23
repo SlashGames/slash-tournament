@@ -4,7 +4,7 @@
    	<div class="col-md-2">@tournament.name</div>
    	<div class="col-md-2">@gameName(tournament.game)</div>
    	<div class="col-md-2">@tournament.getFormattedDate()</div>
-   	<div class="col-md-2">@tournament.location</div>
+   	<div class="col-md-2"><a href="@tournament.googleMapsUrl" target="_blank">@tournament.location</a></div>
    	<div class="col-md-2">
    		<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournament.id)">[Details]</a>
    	</div>

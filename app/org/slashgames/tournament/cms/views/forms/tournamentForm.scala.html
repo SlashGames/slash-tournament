@@ -10,6 +10,7 @@
 	@formSelectGameRules(theForm, "gameRules", "Spielregeln", org.slashgames.tournament.tournaments.modelcontrollers.GameRulesModelController.getGameRules())
   	@formInput(theForm, "datetime-local", "date", "Datum und Uhrzeit")
   	@formInput(theForm, "text", "location", "Ort")
+  	@formInput(theForm, "text", "googleMapsUrl", "Google Maps-URL")
   	@formSelect(theForm, "format", "Format", org.slashgames.tournament.tournaments.modelcontrollers.TournamentFormatModelController.getFormatNames())
   	@formInput(theForm, "text", "bestOf", "Best Of")
   	@formSelect(theForm, "mode", "Modus", org.slashgames.tournament.tournaments.modelcontrollers.TournamentModeModelController.getModeNames())

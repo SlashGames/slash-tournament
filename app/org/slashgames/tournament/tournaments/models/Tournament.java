@@ -24,6 +24,8 @@ public class Tournament extends Model {
 
 	public String location;
 
+	public String googleMapsUrl;
+	
 	public String judge;
 
 	@ManyToOne

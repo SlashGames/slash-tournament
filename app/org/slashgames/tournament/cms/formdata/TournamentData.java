@@ -1,9 +1,14 @@
 package org.slashgames.tournament.cms.formdata;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slashgames.tournament.core.util.StringHelper;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
 public class TournamentData {
+	public static DateTimeFormatter DATE_TIME_FORM_FORMATTER = DateTimeFormat.forPattern("YYYY-MM-dd'T'HH:mm");
+	
 	public String name;
 
 	public String date;
@@ -31,7 +36,7 @@ public class TournamentData {
 			return "Bitte Turniernamen angeben!";
 		}
 
-		if (StringHelper.isNullOrEmpty(date)) {
+		if (date == null) {
 			return "Bitte Datum angeben!";
 		}
 
@@ -73,7 +78,7 @@ public class TournamentData {
 	}
 
 	public void fill(Tournament tournament) {
-		this.date = tournament.date;
+		this.date = DATE_TIME_FORM_FORMATTER.print(tournament.date);
 		this.game = tournament.game.name;
 		this.gameRules = tournament.gameRules.id;
 		this.judge = tournament.judge;

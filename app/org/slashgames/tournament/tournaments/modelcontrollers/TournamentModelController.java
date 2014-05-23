@@ -3,6 +3,7 @@ package org.slashgames.tournament.tournaments.modelcontrollers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.format.DateTimeFormat;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.tournaments.models.TournamentMatch;
@@ -40,7 +41,7 @@ public class TournamentModelController {
 	public static void updateTournament(Tournament tournament,
 			TournamentData data) {
 		tournament.name = data.name;
-		tournament.date = data.date;
+		tournament.date = TournamentData.DATE_TIME_FORM_FORMATTER.parseDateTime(data.date);
 		tournament.location = data.location;
 		tournament.judge = data.judge;
 		tournament.game = GameModelController.findByName(data.game);

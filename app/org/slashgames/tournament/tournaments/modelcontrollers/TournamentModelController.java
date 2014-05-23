@@ -43,6 +43,7 @@ public class TournamentModelController {
 		tournament.name = data.name;
 		tournament.date = TournamentData.DATE_TIME_FORM_FORMATTER.parseDateTime(data.date);
 		tournament.location = data.location;
+		tournament.googleMapsUrl = data.googleMapsUrl;
 		tournament.judge = data.judge;
 		tournament.game = GameModelController.findByName(data.game);
 		tournament.gameRules = GameRulesModelController.findById(data.gameRules);

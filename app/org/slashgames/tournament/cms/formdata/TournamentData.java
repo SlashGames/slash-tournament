@@ -15,6 +15,8 @@ public class TournamentData {
 
 	public String location;
 
+	public String googleMapsUrl;
+	
 	public String judge;
 
 	public Long gameRules;
@@ -44,6 +46,10 @@ public class TournamentData {
 			return "Bitte Ort angeben!";
 		}
 
+		if (StringHelper.isNullOrEmpty(googleMapsUrl)) {
+			return "Bitte Google Maps-URL angeben!";
+		}
+		
 		if (StringHelper.isNullOrEmpty(judge)) {
 			return "Bitte Judge angeben!";
 		}
@@ -83,6 +89,7 @@ public class TournamentData {
 		this.gameRules = tournament.gameRules.id;
 		this.judge = tournament.judge;
 		this.location = tournament.location;
+		this.googleMapsUrl = tournament.googleMapsUrl;
 		this.name = tournament.name;
 		this.bestOf = String.valueOf(tournament.bestOf);
 		this.format = tournament.format.name;

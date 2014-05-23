@@ -7,10 +7,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.avaje.ebean.annotation.EnumMapping;
-import com.avaje.ebean.annotation.EnumValue;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 import play.db.ebean.Model;
+import play.data.format.Formats;
 
 @Entity
 public class Tournament extends Model {
@@ -19,7 +20,7 @@ public class Tournament extends Model {
 
 	public String name;
 
-	public String date;
+	public DateTime date;
 
 	public String location;
 
@@ -46,4 +47,8 @@ public class Tournament extends Model {
 	public TournamentStatus status = TournamentStatus.SIGNUP;
 	
 	public Integer currentRound = 0;
+	
+	public String getFormattedDate() {
+		return DateTimeFormat.forPattern("dd.MM.YYYY HH:mm").print(this.date) + " Uhr";
+	}
 }

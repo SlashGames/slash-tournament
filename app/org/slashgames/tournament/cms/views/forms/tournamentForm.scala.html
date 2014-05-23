@@ -8,7 +8,7 @@
 	@formInput(theForm, "text", "name", "Turniername")
   	@formSelect(theForm, "game", "Spiel", org.slashgames.tournament.tournaments.modelcontrollers.GameModelController.getGameNames())
 	@formSelectGameRules(theForm, "gameRules", "Spielregeln", org.slashgames.tournament.tournaments.modelcontrollers.GameRulesModelController.getGameRules())
-  	@formInput(theForm, "text", "date", "Datum und Uhrzeit")
+  	@formInput(theForm, "datetime-local", "date", "Datum und Uhrzeit")
   	@formInput(theForm, "text", "location", "Ort")
   	@formSelect(theForm, "format", "Format", org.slashgames.tournament.tournaments.modelcontrollers.TournamentFormatModelController.getFormatNames())
   	@formInput(theForm, "text", "bestOf", "Best Of")

@@ -17,6 +17,7 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.Play;
 
 import com.typesafe.plugin.*;
 
@@ -100,6 +101,7 @@ public class LoginController extends Controller {
 		ForgotPasswordData data = form.get();
 		String email = data.email;
 		User user = UserModelController.getUser(email);
+		String from = Play.application().configuration().getString("smtp.from");
 		
 		if (user != null) {
 			// Create token.
@@ -111,7 +113,7 @@ public class LoginController extends Controller {
 			MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
 			mail.setSubject("Passwort vergessen");
 			mail.addRecipient(String.format("%s <%s>", user.name, email));
-			mail.addFrom("slash games Turniersystem <noreply@slash-tournament.slashgames.cloudbees.net>");
+			mail.addFrom(String.format("slash games Turniersystem <%s>", from));
 			mail.send(mailBody);
 		}
 

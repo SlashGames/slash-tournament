@@ -1,1 +1,1 @@
-play -Dconfig.file=conf/dev.conf run 
+play run

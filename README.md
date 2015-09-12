@@ -11,3 +11,10 @@ Website for scheduling tournaments based on the [Play! Framework 2.2.1](https://
 1. Add your database configuration data to conf/application.conf. You should put the password in double-quotes to avoid errors.
 1. Add your mailer configuration to conf/application.conf.
 1. Open TCP port 9000 in your firefall.
+
+## Future Work
+
+* super administration (adding administrators)
+* second game (for verifying abstraction level)
+* localization
+* allow admins to check in players

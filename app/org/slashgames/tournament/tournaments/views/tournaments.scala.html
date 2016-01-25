@@ -23,7 +23,7 @@
 	@tournamentListHeader()
 		
 	@for(tournament <- tournaments) {
-		@if(tournament.status == TournamentStatus.SIGNUP) {
+		@if(tournament.status == TournamentStatus.SIGNUP || tournament.status == TournamentStatus.CHECKIN) {
 			@tournamentListEntry(tournament)
 		}
 	}

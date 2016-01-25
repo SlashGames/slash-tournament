@@ -46,7 +46,7 @@ public class HearthstoneParticipationModelController {
 
 		if (hearthstoneParticipation == null) {
 			// Don't allow to participate when signup is closed.
-			if (tournament.status != TournamentStatus.SIGNUP) {
+			if (tournament.status != TournamentStatus.SIGNUP && tournament.status != TournamentStatus.CHECKIN) {
 				return;
 			}
 			

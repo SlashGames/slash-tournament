@@ -33,7 +33,7 @@ public class ParticipationModelController {
 
 	public static void addParticipant(User participant, Tournament tournament) {
 		// Don't allow to participate when signup is closed.
-		if (tournament.status != TournamentStatus.SIGNUP) {
+		if (tournament.status != TournamentStatus.SIGNUP && tournament.status != TournamentStatus.CHECKIN) {
 			return;
 		}
 		
@@ -45,7 +45,7 @@ public class ParticipationModelController {
 
 	public static void removeParticipant(User participant, Tournament tournament) {
 		// Don't allow to unparticipate when signup is closed.
-		if (tournament.status != TournamentStatus.SIGNUP) {
+		if (tournament.status != TournamentStatus.SIGNUP && tournament.status != TournamentStatus.CHECKIN) {
 			return;
 		}
 		

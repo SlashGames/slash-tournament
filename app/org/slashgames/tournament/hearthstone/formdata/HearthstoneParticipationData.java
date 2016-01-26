@@ -35,11 +35,11 @@ public class HearthstoneParticipationData {
 		try {
 			int rank = Integer.parseInt(seedRank);
 
-			if (rank < 0 || rank > 25) {
-				return "Bitte aktuellen Battle.Net-Rang (1-25) angeben!";
+			if (rank < 1) {
+				return "Bitte Gesamtheldenlevel angeben!";
 			}
 		} catch (NumberFormatException e) {
-			return "Bitte aktuellen Battle.Net-Rang (1-25) angeben!";
+			return "Bitte Gesamtheldenlevel angeben!";
 		}
 
 		// Classes must not be picked more than one.

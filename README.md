@@ -17,4 +17,3 @@ Website for scheduling tournaments based on the [Play! Framework 2.2.1](https://
 * super administration (adding administrators)
 * second game (for verifying abstraction level)
 * localization
-* allow admins to check in players

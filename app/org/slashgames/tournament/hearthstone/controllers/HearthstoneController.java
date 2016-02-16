@@ -15,6 +15,7 @@ import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstonePartici
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController;
 import org.slashgames.tournament.tournaments.modelcontrollers.TournamentModelController;
+import org.slashgames.tournament.tournaments.models.Participation;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
 import play.data.Form;
@@ -121,10 +122,13 @@ public class HearthstoneController extends Controller {
 	@Security.Authenticated(SecuredAdmin.class)
 	public static Result removeParticipant(Long participationId) {
 		HearthstoneParticipation hearthstoneParticipation = HearthstoneParticipationModelController.getParticipation(participationId);
+		Participation participation = hearthstoneParticipation.participation;
+
 		Long tournamentId = hearthstoneParticipation.participation.tournament.id;
 		
 		// Remove participant.
-		ParticipationModelController.removeParticipant(hearthstoneParticipation.participation.participant, hearthstoneParticipation.participation.tournament);
+		HearthstoneParticipationModelController.removeParticipation(
+				participation.participant, participation.tournament);
 		
 		// Redirect to tournament page.
 		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(tournamentId));

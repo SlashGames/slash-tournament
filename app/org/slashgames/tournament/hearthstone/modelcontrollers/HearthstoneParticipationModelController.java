@@ -86,7 +86,13 @@ public class HearthstoneParticipationModelController {
 	public static void removeParticipation(User participant,
 			Tournament tournament) {
 		HearthstoneParticipation hearthstoneParticipation = getParticipation(participant, tournament);
+	
 		if (hearthstoneParticipation != null) {
+			// Reset participation status.
+			hearthstoneParticipation.participation.participationStatus = ParticipationStatus.SIGNED_UP;
+			hearthstoneParticipation.participation.save();
+			
+			// Remove hearthstone participation.
 			hearthstoneParticipation.delete();
 		}
 	}

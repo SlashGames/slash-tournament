@@ -32,7 +32,7 @@ public class MatchModelController {
 	}
 	
 	public static List<TournamentMatch> getMatches(Tournament tournament) {
-		return find.where().eq("tournament", tournament).orderBy().asc("round").orderBy().asc("player1.name").findList();
+		return find.where().eq("tournament", tournament).orderBy().asc("round").orderBy().asc("id").findList();
 	}
 	
 	public static List<TournamentMatch> getMatches(Tournament tournament, Integer round) {

@@ -7,7 +7,10 @@ import org.joda.time.format.DateTimeFormat;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.cms.formdata.TournamentData;
 import org.slashgames.tournament.tournaments.models.TournamentMatch;
+import org.slashgames.tournament.tournaments.models.TournamentPerformance;
+import org.slashgames.tournament.tournaments.controllers.TournamentController;
 import org.slashgames.tournament.tournaments.models.Participation;
+import org.slashgames.tournament.tournaments.models.ParticipationStatus;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
@@ -71,13 +74,19 @@ public class TournamentModelController {
 		tournament.save();
 		
 		// Generate matches.
-		List<Participation> participations = ParticipationModelController.getParticipations(tournament);
+		List<TournamentPerformance> performances =
+				TournamentController.getTournamentPerformance(tournament);
 		
-		for (int i = 0; i < participations.size() - 1; i++) {
-			User player1 = participations.get(i).participant;
-			User player2 = participations.get(i + 1).participant;
+		for (int i = 0; i < performances.size() - 1; i += 2) {
+			User player1 = performances.get(i).player;
+			User player2 = performances.get(i + 1).player;
 			
 			MatchModelController.addMatch(tournament, tournament.currentRound, player1, player2);
+		}
+		
+		if (performances.size() % 2 == 1)
+		{
+			MatchModelController.addMatch(tournament, tournament.currentRound, performances.get(performances.size() - 1).player, null);
 		}
 	}
 }

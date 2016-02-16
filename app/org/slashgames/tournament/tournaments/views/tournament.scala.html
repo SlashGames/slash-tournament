@@ -80,8 +80,7 @@
 		</p>
 	}
 	
-	<h3>Teilnehmer</h3>
-
+	<h3>Teilnehmer (@if(tournament.status == TournamentStatus.SIGNUP){@org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController.getParticipations(tournament)} else {@if(tournament.game.name.equals("Hearthstone")) {@org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController.getParticipations(tournament).size()}})</h3>
 
 	@if(tournament.status == TournamentStatus.SIGNUP) {
 		<div class="row">
@@ -124,25 +123,29 @@
 			<p></p>
 			<p>Die Decklisten der Teilnehmer werden verf&uuml;gbar, sobald das Turnier beendet ist.</p>
 			
-			@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
-				<h3>Weitere Spieler</h3>
-				
+			<h3>Weitere Spieler (@org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController.getParticipations(tournament, ParticipationStatus.SIGNED_UP).size())</h3>
+			
+			<div class="row">
+			   	<div class="col-md-4"><strong>Name</strong></div>
+			   	
+			   	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
+			   		<div class="col-md-4"><strong>Email</strong></div>
+			   		<div class="col-md-4"><strong>Administration</strong></div>
+			   	}
+		    </div>
+	    
+			@for(participation <- org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController.getParticipations(tournament, ParticipationStatus.SIGNED_UP)) {
 				<div class="row">
-				   	<div class="col-md-4"><strong>Name</strong></div>
-				   	<div class="col-md-4"><strong>Email</strong></div>
-				   	<div class="col-md-4"><strong>Administration</strong></div>
-			    </div>
-		    
-				@for(participation <- org.slashgames.tournament.tournaments.modelcontrollers.ParticipationModelController.getParticipations(tournament, ParticipationStatus.SIGNED_UP)) {
-					<div class="row">
-					   	<div class="col-md-4">@participation.participant.name</div>
+				   	<div class="col-md-4">@participation.participant.name</div>
+				   	
+				   	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
 					   	<div class="col-md-4">@participation.participant.email</div>
 					   	
 					   	@if(tournament.status == TournamentStatus.SIGNUP || tournament.status == TournamentStatus.CHECKIN) {
 					   		<div class="col-md-4"><a href="@org.slashgames.tournament.hearthstone.controllers.routes.HearthstoneController.addParticipant(tournament.id, participation.participant.email)">[einchecken]</a></div>
 					   	}
-				    </div>
-				}
+				   	}
+			    </div>
 			}
 		}
 	}

@@ -8,6 +8,7 @@ import org.slashgames.tournament.cms.formdata.MatchData;
 import org.slashgames.tournament.tournaments.models.TournamentMatch;
 import org.slashgames.tournament.tournaments.models.Tournament;
 
+import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 
 import play.Logger;
@@ -59,5 +60,10 @@ public class MatchModelController {
 
 	public static void removeMatch(TournamentMatch match) {
 		match.delete();
+	}
+
+	public static void clearMatches(Tournament tournament) {
+		List<TournamentMatch> matches = getMatches(tournament);
+		Ebean.delete(matches);
 	}
 }

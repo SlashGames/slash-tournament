@@ -39,6 +39,8 @@ GET 	/cms/match/edit/:id				org.slashgames.tournament.cms.controllers.MatchCMSCo
 POST	/cms/match/edit/:id				org.slashgames.tournament.cms.controllers.MatchCMSController.editMatchSubmit(id: Long)
 GET		/cms/match/confirmRemove/:id 	org.slashgames.tournament.cms.controllers.MatchCMSController.confirmRemoveMatch(id: Long)
 GET		/cms/match/remove/:id 			org.slashgames.tournament.cms.controllers.MatchCMSController.removeMatch(id: Long)
+GET		/cms/match/confirmClear/:id 	org.slashgames.tournament.cms.controllers.MatchCMSController.confirmClearMatches(id: Long)
+GET		/cms/match/clear/:id 			org.slashgames.tournament.cms.controllers.MatchCMSController.clearMatches(id: Long)
 
 GET     /cms/hearthstone/participant/confirmRemove/:id		org.slashgames.tournament.hearthstone.controllers.HearthstoneController.confirmRemoveParticipant(id: Long)
 GET	    /cms/hearthstone/participant/remove/:id				org.slashgames.tournament.hearthstone.controllers.HearthstoneController.removeParticipant(id: Long)

@@ -92,4 +92,17 @@ public class MatchCMSController extends Controller {
 		MatchModelController.removeMatch(match);
 		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournament.id));
 	}
+	
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result confirmClearMatches(Long tournamentId) {
+		Tournament tournament = TournamentModelController.findById(tournamentId);
+		return ok(org.slashgames.tournament.cms.views.html.confirmClearMatches.render(tournament));
+	}
+	
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result clearMatches(Long tournamentId) {
+		Tournament tournament = TournamentModelController.findById(tournamentId);
+		MatchModelController.clearMatches(tournament);
+		return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournament.id));
+	}
 }

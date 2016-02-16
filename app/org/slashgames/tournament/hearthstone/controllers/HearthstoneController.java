@@ -5,6 +5,7 @@ import static play.data.Form.form;
 import java.util.List;
 
 import org.slashgames.tournament.auth.controllers.LoginController;
+import org.slashgames.tournament.auth.modelcontrollers.UserModelController;
 import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.auth.security.Secured;
 import org.slashgames.tournament.auth.security.SecuredAdmin;
@@ -70,6 +71,46 @@ public class HearthstoneController extends Controller {
 		}
 	}
 
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result addParticipant(Long tournamentId, String userEmail) {
+		// Prepare form.
+		Form<HearthstoneParticipationData> form = form(HearthstoneParticipationData.class);
+		List<String> classes = HearthstoneClassModelController.getClassNames();
+		
+		User user = UserModelController.getUser(userEmail);
+		Tournament tournament = TournamentModelController
+				.findById(tournamentId);
+
+		return ok(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipateCMS
+				.render(tournament, user, form, classes));
+	}
+	
+	@Security.Authenticated(SecuredAdmin.class)
+	public static Result addParticipantSubmit(Long tournamentId, String userEmail) {
+		Form<HearthstoneParticipationData> participationForm = form(
+				HearthstoneParticipationData.class).bindFromRequest();
+		Tournament tournament = TournamentModelController
+				.findById(tournamentId);
+		User user = UserModelController.getUser(userEmail);
+		
+		// Check for errors.
+		if (participationForm.hasErrors()) {
+			
+			List<String> classes = HearthstoneClassModelController
+					.getClassNames();
+			return badRequest(org.slashgames.tournament.hearthstone.views.html.hearthstoneParticipateCMS
+					.render(tournament, user, participationForm, classes));
+		} else {
+			// Get form data.
+			HearthstoneParticipationData data = participationForm.get();
+
+			HearthstoneParticipationModelController.addOrUpdateParticipation(
+					user, tournament, data);
+			return redirect(org.slashgames.tournament.tournaments.controllers.routes.TournamentController
+					.tournament(tournament.id));
+		}
+	}
+	
 	@Security.Authenticated(SecuredAdmin.class)
 	public static Result confirmRemoveParticipant(Long participationId) {
 		HearthstoneParticipation hearthstoneParticipation = HearthstoneParticipationModelController

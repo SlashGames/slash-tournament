@@ -40,8 +40,10 @@ POST	/cms/match/edit/:id				org.slashgames.tournament.cms.controllers.MatchCMSCo
 GET		/cms/match/confirmRemove/:id 	org.slashgames.tournament.cms.controllers.MatchCMSController.confirmRemoveMatch(id: Long)
 GET		/cms/match/remove/:id 			org.slashgames.tournament.cms.controllers.MatchCMSController.removeMatch(id: Long)
 
-GET     /cms/hearthstone/participant/confirmRemove/:id	org.slashgames.tournament.hearthstone.controllers.HearthstoneController.confirmRemoveParticipant(id: Long)
-GET	    /cms/hearthstone/participant/remove/:id			org.slashgames.tournament.hearthstone.controllers.HearthstoneController.removeParticipant(id: Long)
+GET     /cms/hearthstone/participant/confirmRemove/:id		org.slashgames.tournament.hearthstone.controllers.HearthstoneController.confirmRemoveParticipant(id: Long)
+GET	    /cms/hearthstone/participant/remove/:id				org.slashgames.tournament.hearthstone.controllers.HearthstoneController.removeParticipant(id: Long)
+GET     /cms/hearthstone/participant/checkin/:id/:email		org.slashgames.tournament.hearthstone.controllers.HearthstoneController.addParticipant(id: Long, email: String)
+POST    /cms/hearthstone/participant/checkin/:id/:email		org.slashgames.tournament.hearthstone.controllers.HearthstoneController.addParticipantSubmit(id: Long, email: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

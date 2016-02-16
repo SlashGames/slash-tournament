@@ -6,6 +6,7 @@ import org.slashgames.tournament.auth.models.User;
 import org.slashgames.tournament.hearthstone.modelcontrollers.HearthstoneParticipationModelController;
 import org.slashgames.tournament.hearthstone.models.HearthstoneParticipation;
 import org.slashgames.tournament.tournaments.models.Participation;
+import org.slashgames.tournament.tournaments.models.ParticipationStatus;
 import org.slashgames.tournament.tournaments.models.Tournament;
 import org.slashgames.tournament.tournaments.models.TournamentStatus;
 
@@ -17,6 +18,10 @@ public class ParticipationModelController {
 
 	public static List<Participation> getParticipations(Tournament tournament) {
 		return find.where().eq("tournament", tournament).findList();
+	}
+	
+	public static List<Participation> getParticipations(Tournament tournament, ParticipationStatus status) {
+		return find.where().eq("tournament", tournament).eq("participationStatus", status).findList();
 	}
 	
 	public static List<Participation> getParticipations(User user) {

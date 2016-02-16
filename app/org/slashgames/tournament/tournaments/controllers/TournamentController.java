@@ -156,10 +156,12 @@ public class TournamentController extends Controller {
 		}
 		catch (IllegalStateException e) {
 			return ok(org.slashgames.tournament.core.views.html.message
-					.render("Fehler", e.getMessage(), "Zurück zum Turnier", org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(id)));			
+					.render("Fehler", e.getMessage(), "Zurück zum Turnier",
+							org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(id)));			
 		}
 		
 		return ok(org.slashgames.tournament.core.views.html.message
-				.render("Erfolg", "Matches erzeugt!", "Zurück zum Turnier", org.slashgames.tournament.tournaments.controllers.routes.TournamentController.tournament(id)));
+				.render("Erfolg", "Matches erzeugt!", "Zurück zum Turnier",
+						org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(id)));
 	}
 }

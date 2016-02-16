@@ -7,6 +7,7 @@
 	
 	<div class="row">
 	   	<div class="col-md-2"><strong>Runde</strong></div>
+	   	<div class="col-md-2"><strong>Match ID</strong></div>
 	   	<div class="col-md-2"><strong>Spieler 1</strong></div>
 	   	<div class="col-md-2"><strong>Ergebnis</strong></div>
 	   	<div class="col-md-2"><strong>Spieler 2</strong></div>
@@ -18,7 +19,8 @@
     
 	@for(tournamentMatch <- matches) {
 		<div class="row">
-		   	<div class="col-md-2">@tournamentMatch.round</div>		
+		   	<div class="col-md-2">@tournamentMatch.round</div>
+		   	<div class="col-md-2">@tournamentMatch.id</div>		
 		   	<div class="col-md-2">@if(tournamentMatch.player1 != null) { @tournamentMatch.player1.name } else { BYE }</div>
 		   	<div class="col-md-2">@tournamentMatch.player1Wins - @tournamentMatch.player2Wins</div>
 		   	<div class="col-md-2">@if(tournamentMatch.player2 != null) { @tournamentMatch.player2.name } else { BYE }</div>
@@ -33,6 +35,12 @@
 	}
 	
   	@if(org.slashgames.tournament.auth.controllers.LoginController.isAdmin) {
-		<p><a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.addMatch(tournament.id)">Match hinzuf&uuml;gen</a></p>
+		<p>
+			<a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.addMatch(tournament.id)">Match hinzuf&uuml;gen</a>
+			&middot;
+			<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.startNextRound(tournament.id)">neue Runde generieren</a>
+			&middot;
+			<a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.confirmClearMatches(tournament.id)">alle Matches entfernen</a>
+		</p>
 	}
 }

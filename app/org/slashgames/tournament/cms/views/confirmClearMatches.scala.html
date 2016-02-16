@@ -1,0 +1,14 @@
+@(tournament: org.slashgames.tournament.tournaments.models.Tournament)
+
+@import org.slashgames.tournament.core.views.html._
+
+@main("Matches entfernen") {
+	<p>Wirklich <i>alle</i> Matches entfernen?</p>
+	<p><i>Diese Aktion kann nicht r&uuml;ckg&auml;ngig gemacht werden.</i></p>
+	<p><strong>Turnier: </strong> @tournament.name</p>
+	
+	<p>
+		<a href="@org.slashgames.tournament.cms.controllers.routes.MatchCMSController.clearMatches(tournament.id)">ja</a>
+		<a href="@org.slashgames.tournament.tournaments.controllers.routes.TournamentController.matches(tournament.id)">nein</a>
+	</p>
+}
